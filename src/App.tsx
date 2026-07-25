@@ -1,7 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 import img1 from '@/imports/image-1.png'
 import logoImg from '@/imports/bylance-logo.png'
-import TargetCursor from './TargetCursor'
 import GradualBlur from './GradualBlur'
 import VariableProximity from './VariableProximity'
 import LineSidebar from './LineSidebar'
@@ -10,6 +9,7 @@ import Stepper, { Step } from './Stepper'
 import SpecularButton from './SpecularButton'
 import CursorGrid from './CursorGrid'
 import TiltedCard from './TiltedCard'
+import ClientsSection from './ClientsSection'
 
 
 
@@ -60,22 +60,27 @@ function useInView(ref: React.RefObject<Element | null>, threshold = 0.12) {
 
 function Navbar() {
   const menuItems = [
+    { label: 'Home', ariaLabel: 'Home', link: '#hero' },
     { label: 'Services', ariaLabel: 'Our Services', link: '#services' },
+    { label: 'Clients', ariaLabel: 'Our Clients', link: '#clients' },
     { label: 'Approach', ariaLabel: 'Our Approach', link: '#approach' },
     { label: 'Manifesto', ariaLabel: 'Our Manifesto', link: '#manifesto' },
-    { label: 'Stack', ariaLabel: 'Tech Stack', link: '#stack' },
-    { label: 'Contact', ariaLabel: 'Start a project', link: '#contact' },
+    { label: 'Contact', ariaLabel: 'Boot a Meet', link: '#contact' },
   ]
 
   const socialItems = [
     { label: 'LinkedIn', link: 'https://linkedin.com' },
     { label: 'Twitter', link: 'https://twitter.com' },
-    { label: 'GitHub', link: 'https://github.com' },
+    { label: 'GitHub', link: 'https://github.com/nezfn' },
   ]
 
   const handleSidebarClick = (_index: number, label: string) => {
     const id = label.toLowerCase()
-    document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' })
+    if (id === 'home') {
+      window.scrollTo({ top: 0, behavior: 'smooth' })
+    } else {
+      document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' })
+    }
   }
 
   return (
@@ -95,7 +100,7 @@ function Navbar() {
           href="#contact"
           className="hidden sm:flex items-center px-4 py-2 sm:px-5 sm:py-2 rounded-full bg-white text-black text-xs sm:text-sm font-semibold hover:bg-teal-400 hover:text-black transition-all duration-200 cursor-target shadow-lg shadow-white/5 pointer-events-auto"
         >
-          Start a project
+          Boot a Meet
         </a>
       </header>
 
@@ -174,7 +179,7 @@ function Hero() {
   const textY2 = (1 - p) * 55
 
   return (
-    <div ref={pinRef} style={{ height: '220vh' }} className="relative">
+    <div ref={pinRef} id="hero" style={{ height: '220vh' }} className="relative">
       <div
         className="sticky top-0 h-screen overflow-hidden flex flex-col items-center justify-center grid-bg select-none"
         onMouseMove={handleMouseMove}
@@ -335,7 +340,7 @@ function Hero() {
                 autoAnimate={false}
                 onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
               >
-                Start a project
+                Boot a Meet
                 <svg
                   className="w-4 h-4"
                   fill="none"
@@ -367,6 +372,28 @@ function Hero() {
                 onClick={() => document.getElementById('services')?.scrollIntoView({ behavior: 'smooth' })}
               >
                 Explore services
+              </SpecularButton>
+
+              <SpecularButton
+                size="lg"
+                radius={9999}
+                tint="#ffffff"
+                tintOpacity={0.02}
+                blur={8}
+                textColor="#e5e5e5"
+                lineColor="#3b82f6"
+                baseColor="#52525b"
+                intensity={1.1}
+                shineSize={14}
+                shineFade={40}
+                thickness={1.2}
+                speed={0.3}
+                followMouse={true}
+                proximity={250}
+                autoAnimate={false}
+                onClick={() => document.getElementById('clients')?.scrollIntoView({ behavior: 'smooth' })}
+              >
+                Our Clients
               </SpecularButton>
             </div>
           </div>
@@ -670,53 +697,13 @@ function ManifestoSection() {
   )
 }
 
-// ─── Stack — marquee ─────────────────────────────────────────────────────────
-
-const stackTags = ['React', 'Next.js', 'TypeScript', 'Node.js', 'Python', 'PostgreSQL', 'Swift', 'Kotlin', 'AWS', 'Vercel', 'Docker', 'Kubernetes', 'Terraform', 'GraphQL', 'Redis', 'OpenAI', 'Supabase', 'Go', 'Rust', 'Expo']
-
-function StackSection() {
-  const ref = useRef<HTMLElement>(null)
-  const inView = useInView(ref as React.RefObject<Element>)
-  const doubled = [...stackTags, ...stackTags]
-
-  return (
-    <section id="stack" className="py-28 overflow-hidden" ref={ref}>
-      <div
-        className="max-w-3xl mx-auto px-4 text-center mb-14 transition-all duration-700"
-        style={{ opacity: inView ? 1 : 0, transform: inView ? 'translateY(0)' : 'translateY(32px)' }}
-      >
-        <p className="text-teal-400 text-xs font-semibold tracking-[0.2em] uppercase mb-4">// Toolkit</p>
-        <h2 style={{ fontFamily: 'Sora, sans-serif' }} className="text-4xl md:text-5xl font-bold text-white mb-4">
-          A modern stack we know deeply
-        </h2>
-        <p className="text-white/45 text-base leading-relaxed">
-          We pick boring, proven technology by default and reach for the frontier only when it earns its place.
-        </p>
-      </div>
-
-      <div className="relative">
-        <div className="absolute left-0 top-0 bottom-0 w-32 z-10 bg-gradient-to-r from-[#080808] to-transparent" />
-        <div className="absolute right-0 top-0 bottom-0 w-32 z-10 bg-gradient-to-l from-[#080808] to-transparent" />
-        <div className="flex overflow-hidden">
-          <div className="marquee-track flex gap-3 whitespace-nowrap">
-            {doubled.map((tag, i) => (
-              <span key={i} className="inline-flex items-center px-5 py-2.5 rounded-full border border-white/10 bg-[#111] text-white/60 text-sm font-medium hover:border-teal-500/40 hover:text-white/80 transition-colors cursor-default">
-                {tag}
-              </span>
-            ))}
-          </div>
-        </div>
-      </div>
-    </section>
-  )
-}
 
 // ─── Contact ─────────────────────────────────────────────────────────────────
 
 function ContactSection() {
   const ref = useRef<HTMLElement>(null)
   const inView = useInView(ref as React.RefObject<Element>)
-  const [form, setForm] = useState({ name: '', email: '', company: '', projectType: '', budget: '', details: '' })
+  const [form, setForm] = useState({ name: '', email: '', projectType: '', details: '', company: '', description: '' })
   const [sent, setSent] = useState(false)
 
   const inputClass = "w-full px-4 py-3 rounded-xl bg-[#111] border border-white/10 text-white text-sm placeholder-white/30 focus:outline-none focus:border-teal-500/50 transition-colors"
@@ -728,10 +715,10 @@ function ContactSection() {
       return form.name.trim().length > 0 && emailRegex.test(form.email.trim())
     }
     if (step === 2) {
-      return form.projectType.trim().length > 0 && form.budget.trim().length > 0
+      return form.projectType.trim().length > 0 && form.details.trim().length > 0
     }
     if (step === 3) {
-      return form.details.trim().length > 0
+      return form.company.trim().length > 0
     }
     return true
   }
@@ -819,8 +806,8 @@ function ContactSection() {
 
               <Step>
                 <div className="mb-2">
-                  <h3 style={{ fontFamily: 'Sora, sans-serif' }} className="text-xl font-semibold text-white mb-1">Scope & Budget</h3>
-                  <p className="text-white/45 text-xs">Describe what you are building and your target budget.</p>
+                  <h3 style={{ fontFamily: 'Sora, sans-serif' }} className="text-xl font-semibold text-white mb-1">Project Details</h3>
+                  <p className="text-white/45 text-xs">Tell us about the project type and key requirements.</p>
                 </div>
                 <div className="flex flex-col gap-3.5 mt-4">
                   <div>
@@ -834,13 +821,13 @@ function ContactSection() {
                     />
                   </div>
                   <div>
-                    <label className={labelClass}>Estimated Budget Range *</label>
-                    <input
-                      className={inputClass}
-                      placeholder="e.g. $15,000 – $30,000"
+                    <label className={labelClass}>Project Details & Scope *</label>
+                    <textarea
+                      className={inputClass + ' resize-none h-24'}
+                      placeholder="What are you building, and what does success look like?"
                       required
-                      value={form.budget}
-                      onChange={e => setForm(f => ({ ...f, budget: e.target.value }))}
+                      value={form.details}
+                      onChange={e => setForm(f => ({ ...f, details: e.target.value }))}
                     />
                   </div>
                 </div>
@@ -848,17 +835,28 @@ function ContactSection() {
 
               <Step>
                 <div className="mb-2">
-                  <h3 style={{ fontFamily: 'Sora, sans-serif' }} className="text-xl font-semibold text-white mb-1">Product Details</h3>
-                  <p className="text-white/45 text-xs">Tell us about your goals and requirements.</p>
+                  <h3 style={{ fontFamily: 'Sora, sans-serif' }} className="text-xl font-semibold text-white mb-1">Company Details</h3>
+                  <p className="text-white/45 text-xs">Tell us about your organization and team.</p>
                 </div>
                 <div className="flex flex-col gap-3.5 mt-4">
                   <div>
-                    <label className={labelClass}>Company / Organization</label>
-                    <input className={inputClass} placeholder="Acme Inc." value={form.company} onChange={e => setForm(f => ({ ...f, company: e.target.value }))} />
+                    <label className={labelClass}>Company / Organization *</label>
+                    <input
+                      className={inputClass}
+                      placeholder="e.g. Acme Corp"
+                      required
+                      value={form.company}
+                      onChange={e => setForm(f => ({ ...f, company: e.target.value }))}
+                    />
                   </div>
                   <div>
-                    <label className={labelClass}>Project Details *</label>
-                    <textarea className={inputClass + ' resize-none h-24'} placeholder="What are you building, and what does success look like?" required value={form.details} onChange={e => setForm(f => ({ ...f, details: e.target.value }))} />
+                    <label className={labelClass}>Description</label>
+                    <textarea
+                      className={inputClass + ' resize-none h-20'}
+                      placeholder="Brief description of your company or product focus..."
+                      value={form.description}
+                      onChange={e => setForm(f => ({ ...f, description: e.target.value }))}
+                    />
                   </div>
                 </div>
               </Step>
@@ -899,7 +897,7 @@ function Footer() {
           <div>
             <p className="text-white/25 text-xs uppercase tracking-widest mb-4">Explore</p>
             <ul className="flex flex-col gap-2.5">
-              {[['Stack', '#stack'], ['Contact', '#contact']].map(([label, href]) => (
+              {[['Contact', '#contact']].map(([label, href]) => (
                 <li key={label}><a href={href} className="text-white/50 hover:text-white text-sm transition-colors">{label}</a></li>
               ))}
             </ul>
@@ -920,7 +918,7 @@ function Footer() {
             <a href="#" className="text-white/30 hover:text-white transition-colors">
               <svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" /></svg>
             </a>
-            <a href="#" className="text-white/30 hover:text-white transition-colors">
+            <a href="https://github.com/nezfn" target="_blank" rel="noopener noreferrer" className="text-white/30 hover:text-white transition-colors" title="GitHub: nezfn">
               <svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0112 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z" /></svg>
             </a>
           </div>
@@ -952,21 +950,13 @@ export default function App() {
 
   return (
     <div className="bg-[#080808] text-white min-h-screen relative">
-      <TargetCursor
-        targetSelector="a, button, .cursor-target"
-        spinDuration={2}
-        hideDefaultCursor={true}
-        parallaxOn={true}
-        cursorColor="#14b8a6"
-        cursorColorOnTarget="#ec4899"
-      />
       <Navbar />
       <Hero />
       <StatsSection />
       <ServicesSection />
+      <ClientsSection />
       <ApproachSection />
       <ManifestoSection />
-      <StackSection />
       <ContactSection />
       <Footer />
       <div className={`hidden md:block transition-opacity duration-500 ${atBottom ? 'opacity-0 pointer-events-none' : 'opacity-100'}`}>
