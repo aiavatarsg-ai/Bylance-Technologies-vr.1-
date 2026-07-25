@@ -15,6 +15,19 @@ html {
   scrollbar-width: none;
 }
 
+/* Proportional website scaling for 150% browser zoom ratio and compact viewports */
+@media (max-width: 1479px) {
+  html {
+    font-size: 88.5%;
+  }
+}
+
+@media (max-height: 850px) {
+  html {
+    font-size: 87.5%;
+  }
+}
+
 html::-webkit-scrollbar {
   display: none;
 }
