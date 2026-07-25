@@ -107,8 +107,9 @@
   transform: translateY(-50%) translateX(calc(var(--effect, 0) * var(--max-shift) * 0.5)) scaleX(calc(0.7 + var(--effect, 0) * 0.6));
 }
 
-@media (max-width: 1024px) {
+/* Hide fixed left sidebar whenever viewport is under 1480px (e.g. 150% or 125% display scaling) to prevent card overlap */
+@media (max-width: 1479px) {
   .line-sidebar {
-    display: none;
+    display: none !important;
   }
 }

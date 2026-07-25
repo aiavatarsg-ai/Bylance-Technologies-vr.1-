@@ -129,8 +129,8 @@ function Navbar() {
         onItemClick={handleSidebarClick}
       />
 
-      {/* Mobile Navigation: Staggered Menu */}
-      <div className="lg:hidden">
+      {/* Navigation Menu (Shown when LineSidebar is hidden under 1480px viewport width) */}
+      <div className="min-[1480px]:hidden">
         <StaggeredMenu
           position="right"
           items={menuItems}
