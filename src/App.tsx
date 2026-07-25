@@ -1,5 +1,4 @@
 import { useEffect, useRef, useState } from 'react'
-import img1 from '@/imports/image-1.png'
 import logoImg from '@/imports/bylance-logo.png'
 import GradualBlur from './GradualBlur'
 import VariableProximity from './VariableProximity'
@@ -256,14 +255,81 @@ function Hero() {
                 <div className="w-10" />
               </div>
 
-              {/* Showcase Image */}
-              <div className="relative group overflow-hidden">
-                <div className="absolute inset-0 bg-[#080808]/75 backdrop-blur-[1.5px] z-10 pointer-events-none group-hover:bg-[#080808]/50 transition-all duration-500" />
-                <img
-                  src={img1}
-                  alt="Bylance platform"
-                  className="w-full object-cover block transition-transform duration-700 group-hover:scale-[1.01]"
-                />
+              {/* Interactive AI Studio Workspace Mockup */}
+              <div className="bg-[#09090d] p-5 sm:p-6 text-left border-t border-white/5 font-mono text-xs text-white/80 min-h-[300px] flex flex-col justify-between">
+                {/* Editor Header Bar */}
+                <div className="flex items-center justify-between pb-3.5 border-b border-white/8 text-[11px]">
+                  <div className="flex items-center gap-3">
+                    <span className="px-2.5 py-1 rounded bg-teal-500/10 border border-teal-500/20 text-teal-300 font-semibold">
+                      App.tsx
+                    </span>
+                    <span className="text-white/40 hover:text-white/70 transition-colors cursor-pointer hidden sm:inline">
+                      LangGraph.ts
+                    </span>
+                    <span className="text-white/40 hover:text-white/70 transition-colors cursor-pointer hidden sm:inline">
+                      Cloudflare.config
+                    </span>
+                  </div>
+
+                  <div className="flex items-center gap-2">
+                    <span className="w-2 h-2 rounded-full bg-teal-400 animate-pulse" />
+                    <span className="text-teal-400 font-semibold tracking-wide text-[10px]">
+                      SYSTEM ACTIVE • 99.9% UPTIME
+                    </span>
+                  </div>
+                </div>
+
+                {/* Simulated Syntax Highlighting & AI Telemetry Grid */}
+                <div className="grid grid-cols-1 md:grid-cols-12 gap-4 py-4 items-center">
+                  <div className="md:col-span-8 bg-[#0d0d14] p-4 rounded-xl border border-white/8 space-y-1.5 font-mono text-[11px] leading-relaxed">
+                    <div>
+                      <span className="text-purple-400 font-semibold">import</span> &#123;{' '}
+                      <span className="text-cyan-300">LangGraph</span>, <span className="text-cyan-300">Gemini</span>,{' '}
+                      <span className="text-cyan-300">DeepSeek</span> &#125; <span className="text-purple-400">from</span>{' '}
+                      <span className="text-emerald-300">'@bylance/ai-engine'</span>
+                    </div>
+                    <div className="text-white/30">// Initialize multi-agent orchestration for enterprise client</div>
+                    <div>
+                      <span className="text-purple-400 font-semibold">export const</span>{' '}
+                      <span className="text-yellow-300">agentStack</span> = <span className="text-purple-400">new</span>{' '}
+                      <span className="text-cyan-300">LangGraph</span>(&#123;
+                    </div>
+                    <div className="pl-4">
+                      orchestration: <span className="text-emerald-300">'autonomous-search-validation'</span>,
+                    </div>
+                    <div className="pl-4">
+                      llms: [<span className="text-teal-300">Gemini.v1_5</span>, <span className="text-teal-300">DeepSeek.r1</span>],
+                    </div>
+                    <div className="pl-4">
+                      edgeHost: <span className="text-emerald-300">'cloudflare-pages'</span>,
+                    </div>
+                    <div className="pl-4">
+                      crmIntegration: <span className="text-emerald-300">'interakt-whatsapp'</span>
+                    </div>
+                    <div>&#125;)</div>
+                  </div>
+
+                  <div className="md:col-span-4 flex flex-col gap-2.5">
+                    <div className="p-3 rounded-xl bg-teal-500/10 border border-teal-500/20">
+                      <div className="text-[10px] text-teal-300 uppercase tracking-widest mb-0.5 font-mono">Edge Latency</div>
+                      <div className="text-lg font-bold text-white font-sans">14ms Global SLA</div>
+                    </div>
+                    <div className="p-3 rounded-xl bg-pink-500/10 border border-pink-500/20">
+                      <div className="text-[10px] text-pink-300 uppercase tracking-widest mb-0.5 font-mono">Agent Validation</div>
+                      <div className="text-sm font-bold text-white font-sans">100% Real-Time</div>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Editor Footer Bar */}
+                <div className="pt-2.5 border-t border-white/8 flex items-center justify-between text-[10px] text-white/40">
+                  <div className="flex items-center gap-4">
+                    <span>UTF-8</span>
+                    <span>TypeScript 5.7</span>
+                    <span>Cloudflare Edge</span>
+                  </div>
+                  <div className="text-teal-400 font-semibold">● BYLANCE STUDIO ENGINE</div>
+                </div>
               </div>
             </div>
           </div>
