@@ -10,6 +10,7 @@ import SpecularButton from './SpecularButton'
 import CursorGrid from './CursorGrid'
 import TiltedCard from './TiltedCard'
 import ClientsSection from './ClientsSection'
+import ServicesSection from './ServicesSection'
 
 
 
@@ -447,115 +448,6 @@ function StatsSection() {
   )
 }
 
-// ─── Services — 3D card reveal ───────────────────────────────────────────────
-
-const serviceCards = [
-  {
-    icon: <svg width="22" height="22" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}><path strokeLinecap="round" strokeLinejoin="round" d="M17.25 6.75L22.5 12l-5.25 5.25m-10.5 0L1.5 12l5.25-5.25m7.5-3l-4.5 16.5" /></svg>,
-    title: 'Web engineering',
-    desc: 'Fast, accessible web apps built on modern frameworks with performance and SEO baked in from day one.',
-  },
-  {
-    icon: <svg width="22" height="22" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}><path strokeLinecap="round" strokeLinejoin="round" d="M10.5 1.5H8.25A2.25 2.25 0 006 3.75v16.5a2.25 2.25 0 002.25 2.25h7.5A2.25 2.25 0 0018 20.25V3.75a2.25 2.25 0 00-2.25-2.25H13.5m-3 0V3h3V1.5m-3 0h3m-3 18h3" /></svg>,
-    title: 'Mobile products',
-    desc: 'Native-feeling iOS and Android apps that share a codebase without compromising on polish.',
-  },
-  {
-    icon: <svg width="22" height="22" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}><path strokeLinecap="round" strokeLinejoin="round" d="M2.25 15a4.5 4.5 0 004.5 4.5H18a3.75 3.75 0 001.332-7.257 3 3 0 00-3.758-3.848 5.25 5.25 0 00-10.233 2.33A4.502 4.502 0 002.25 15z" /></svg>,
-    title: 'Cloud & infrastructure',
-    desc: 'Scalable, observable infrastructure with CI/CD, IaC, and cost controls that grow with you.',
-  },
-  {
-    icon: <svg width="22" height="22" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}><path strokeLinecap="round" strokeLinejoin="round" d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09z" /></svg>,
-    title: 'Applied AI',
-    desc: 'Practical LLM features, RAG pipelines, and agents integrated into products people actually use.',
-  },
-  {
-    icon: <svg width="22" height="22" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}><path strokeLinecap="round" strokeLinejoin="round" d="M9.53 16.122a3 3 0 00-5.78 1.128 2.25 2.25 0 01-2.4 2.245 4.5 4.5 0 008.4-2.245c0-.399-.078-.78-.22-1.128zm0 0a15.998 15.998 0 003.388-1.62m-5.043-.025a15.994 15.994 0 011.622-3.395m3.42 3.42a15.995 15.995 0 004.764-4.648l3.876-5.814a1.151 1.151 0 00-1.597-1.597L14.146 6.32a15.996 15.996 0 00-4.649 4.763m3.42 3.42a6.776 6.776 0 00-3.42-3.42" /></svg>,
-    title: 'Product design',
-    desc: 'Research-led UX and interface design that turns complex workflows into clear, usable experiences.',
-  },
-  {
-    icon: <svg width="22" height="22" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}><path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z" /></svg>,
-    title: 'Reliability & security',
-    desc: 'Hardening, audits, and monitoring so your product stays available, compliant, and trusted.',
-  },
-]
-
-function Card3D({ children, delay = 0, className = '' }: { children: React.ReactNode; delay?: number; className?: string }) {
-  const ref = useRef<HTMLDivElement>(null)
-  const inView = useInView(ref as React.RefObject<Element>)
-
-  return (
-    <div
-      ref={ref}
-      className={`transition-all duration-700 ${className}`}
-      style={{
-        transitionDelay: `${delay}ms`,
-        opacity: inView ? 1 : 0,
-        transform: inView ? 'translateY(0) rotateX(0deg)' : 'translateY(48px) rotateX(14deg)',
-        perspective: '800px',
-        transformOrigin: 'top center',
-      }}
-    >
-      {children}
-    </div>
-  )
-}
-
-function ServicesSection() {
-  const ref = useRef<HTMLElement>(null)
-  const inView = useInView(ref as React.RefObject<Element>)
-
-  return (
-    <section id="services" className="py-28 px-4 grid-bg relative overflow-hidden" ref={ref}>
-      <div className="absolute inset-0 pointer-events-none z-0">
-        <CursorGrid
-          cellSize={48}
-          color="#14b8a6"
-          radius={150}
-          falloff="smooth"
-          holdTime={400}
-          fadeDuration={800}
-          lineWidth={1.2}
-          maxOpacity={0.35}
-          fillOpacity={0.03}
-          gridOpacity={0.02}
-          clickPulse={true}
-          pulseSpeed={650}
-        />
-      </div>
-      <div className="max-w-6xl mx-auto relative z-10">
-        <div
-          className="mb-14 transition-all duration-700"
-          style={{ opacity: inView ? 1 : 0, transform: inView ? 'translateY(0)' : 'translateY(32px)' }}
-        >
-          <p className="text-teal-400 text-xs font-semibold tracking-[0.2em] uppercase mb-4">// What we do</p>
-          <h2 style={{ fontFamily: 'Sora, sans-serif' }} className="text-4xl md:text-5xl font-bold text-white max-w-2xl leading-tight">
-            One team for the entire product lifecycle
-          </h2>
-          <p className="mt-4 text-white/45 text-base max-w-xl leading-relaxed">
-            From discovery to delivery, Bylance covers every layer of your stack so you don't have to stitch together five vendors.
-          </p>
-        </div>
-
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4" style={{ perspective: '1000px' }}>
-          {serviceCards.map(({ icon, title, desc }, i) => (
-            <Card3D key={title} delay={i * 65}>
-              <div className="group p-6 rounded-2xl bg-[#111] border border-white/8 hover:border-teal-500/30 hover:bg-[#131c1f] transition-colors duration-300 h-full">
-                <div className="w-10 h-10 rounded-xl bg-[#0d1f1e] border border-teal-500/20 flex items-center justify-center text-teal-400 mb-5 group-hover:bg-teal-500/10 transition-colors">
-                  {icon}
-                </div>
-                <h3 style={{ fontFamily: 'Sora, sans-serif' }} className="text-white font-semibold text-base mb-2">{title}</h3>
-                <p className="text-white/45 text-sm leading-relaxed">{desc}</p>
-              </div>
-            </Card3D>
-          ))}
-        </div>
-      </div>
-    </section>
-  )
-}
 
 // ─── Approach — horizontal 3D flip-in ────────────────────────────────────────
 
