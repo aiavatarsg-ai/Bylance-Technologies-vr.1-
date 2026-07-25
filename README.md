@@ -16,11 +16,10 @@ Bylance Technologies is a modern software solutions firm. We bridge the gap betw
 * **Fully Responsive:** Fluid design that adapts perfectly across desktop, tablet, and mobile devices.
 
 ## 🛠️ Tech Stack
-*(Update these based on the exact tools you used for this version)*
-* **Frontend:** React.js / Next.js, Tailwind CSS
-* **Backend:** Node.js, Express (If applicable)
+* **Frontend:** React.js, Tailwind CSS, React bits
+* **Backend:** Node.js
 * **Database:** MongoDB / Supabase
-* **Deployment:** Vercel / Netlify / Custom Hosting
+* **Deployment:** Netlify
 
 ## 🚀 Getting Started
 
