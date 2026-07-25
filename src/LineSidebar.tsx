@@ -32,6 +32,7 @@ export interface LineSidebarProps {
   itemGap?: number;
   fontSize?: number;
   smoothing?: number;
+  activeIndex?: number | null;
   defaultActive?: number | null;
   onItemClick?: (index: number, label: string) => void;
   className?: string;
@@ -54,6 +55,7 @@ const LineSidebar: React.FC<LineSidebarProps> = ({
   itemGap = 20,
   fontSize = 1.1,
   smoothing = 100,
+  activeIndex: propActiveIndex,
   defaultActive = null,
   onItemClick,
   className = ''
@@ -64,9 +66,10 @@ const LineSidebar: React.FC<LineSidebarProps> = ({
   const currentRef = useRef<number[]>([]);
   const rafRef = useRef<number | null>(null);
   const lastRef = useRef<number>(0);
-  const activeRef = useRef<number | null>(defaultActive);
+  const [internalActive, setInternalActive] = useState<number | null>(defaultActive);
+  const activeIndex = propActiveIndex !== undefined ? propActiveIndex : internalActive;
+  const activeRef = useRef<number | null>(activeIndex);
   const smoothingRef = useRef<number>(smoothing);
-  const [activeIndex, setActiveIndex] = useState<number | null>(defaultActive);
 
   activeRef.current = activeIndex;
   smoothingRef.current = smoothing;
@@ -128,7 +131,7 @@ const LineSidebar: React.FC<LineSidebarProps> = ({
 
   const handleClick = useCallback(
     (index: number, label: string) => {
-      setActiveIndex(index);
+      setInternalActive(index);
       onItemClick?.(index, label);
     },
     [onItemClick]
