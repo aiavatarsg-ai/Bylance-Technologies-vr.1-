@@ -180,12 +180,22 @@ function Navbar() {
 function Hero() {
   const pinRef = useRef<HTMLDivElement>(null)
   const titleContainerRef = useRef<HTMLHeadingElement>(null)
+  const [isMobile, setIsMobile] = useState<boolean>(false)
+
+  useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth <= 768)
+    checkMobile()
+    window.addEventListener('resize', checkMobile)
+    return () => window.removeEventListener('resize', checkMobile)
+  }, [])
+
   const progress = useScrollProgress(pinRef as React.RefObject<HTMLElement>, 0, 1)
-  const p = easeOutCubic(progress)
+  const p = isMobile ? 1 : easeOutCubic(progress)
 
   // Mouse interaction state for subtle extra 3D tilt
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 })
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (isMobile) return
     const rect = e.currentTarget.getBoundingClientRect()
     const x = (e.clientX - rect.left - rect.width / 2) / (rect.width / 2)
     const y = (e.clientY - rect.top - rect.height / 2) / (rect.height / 2)
@@ -194,20 +204,24 @@ function Hero() {
   const handleMouseLeave = () => setMousePos({ x: 0, y: 0 })
 
   // 3D image rotation calculations (combining scroll + mouse offset)
-  const imgRotateX = (1 - p) * 22 - mousePos.y * 5 * (1 - p)
-  const imgRotateY = (1 - p) * -10 + mousePos.x * 6 * (1 - p)
-  const imgScale   = 0.82 + p * 0.18
-  const imgZ       = (1 - p) * -60
+  const imgRotateX = isMobile ? 0 : (1 - p) * 22 - mousePos.y * 5 * (1 - p)
+  const imgRotateY = isMobile ? 0 : (1 - p) * -10 + mousePos.x * 6 * (1 - p)
+  const imgScale   = isMobile ? 1 : 0.82 + p * 0.18
+  const imgZ       = isMobile ? 0 : (1 - p) * -60
   const imgShadowOpacity = 0.35 + p * 0.45
 
   // Subtle text parallax translation
-  const textY1 = (1 - p) * 10
-  const textY2 = (1 - p) * 18
+  const textY1 = isMobile ? 0 : (1 - p) * 10
+  const textY2 = isMobile ? 0 : (1 - p) * 18
 
   return (
-    <div ref={pinRef} id="hero" style={{ height: '220vh' }} className="relative">
+    <div ref={pinRef} id="hero" style={{ height: isMobile ? 'auto' : '220vh' }} className="relative bg-[#080808]">
       <div
-        className="sticky top-0 h-screen overflow-hidden flex flex-col items-center justify-between grid-bg select-none"
+        className={
+          isMobile
+            ? 'relative w-full min-h-[85vh] py-24 px-4 flex flex-col items-center justify-center text-center grid-bg select-none z-10'
+            : 'sticky top-0 h-screen overflow-hidden flex flex-col items-center justify-between grid-bg select-none'
+        }
         onMouseMove={handleMouseMove}
         onMouseLeave={handleMouseLeave}
       >
@@ -492,16 +506,18 @@ function Hero() {
           </div>
         </div>
 
-        {/* Scroll cue */}
-        <div
-          className="absolute bottom-8 left-1/2 -translate-x-1/2 z-30 flex flex-col items-center gap-2.5 pointer-events-none transition-opacity duration-300"
-          style={{ opacity: clamp(1 - progress * 3, 0, 1) }}
-        >
-          <span className="text-white/40 text-[11px] font-mono tracking-[0.2em] uppercase">Scroll to explore</span>
-          <div className="w-[2px] h-10 bg-white/10 rounded-full overflow-hidden relative">
-            <div className="w-full h-1/2 bg-gradient-to-b from-teal-400 to-pink-400 rounded-full animate-scroll-line" />
+        {/* Scroll cue (Desktop only) */}
+        {!isMobile && (
+          <div
+            className="absolute bottom-8 left-1/2 -translate-x-1/2 z-30 flex flex-col items-center gap-2.5 pointer-events-none transition-opacity duration-300"
+            style={{ opacity: clamp(1 - progress * 3, 0, 1) }}
+          >
+            <span className="text-white/40 text-[11px] font-mono tracking-[0.2em] uppercase">Scroll to explore</span>
+            <div className="w-[2px] h-10 bg-white/10 rounded-full overflow-hidden relative">
+              <div className="w-full h-1/2 bg-gradient-to-b from-teal-400 to-pink-400 rounded-full animate-scroll-line" />
+            </div>
           </div>
-        </div>
+        )}
       </div>
     </div>
   )
