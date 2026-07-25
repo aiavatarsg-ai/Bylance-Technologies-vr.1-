@@ -11,6 +11,7 @@ import CursorGrid from './CursorGrid'
 import TiltedCard from './TiltedCard'
 import ClientsSection from './ClientsSection'
 import ServicesSection from './ServicesSection'
+import ClickSpark from './ClickSpark'
 
 
 
@@ -937,30 +938,38 @@ export default function App() {
   const atBottom = useAtBottom(300)
 
   return (
-    <div className="bg-[#080808] text-white min-h-screen relative">
-      <Navbar />
-      <Hero />
-      <StatsSection />
-      <ServicesSection />
-      <ClientsSection />
-      <ApproachSection />
-      <ManifestoSection />
-      <ContactSection />
-      <Footer />
-      <div className={`hidden md:block transition-opacity duration-500 ${atBottom ? 'opacity-0 pointer-events-none' : 'opacity-100'}`}>
-        <GradualBlur
-          target="page"
-          position="bottom"
-          height="4.5rem"
-          curve="bezier"
-          strength={3}
-          divCount={8}
-          exponential={true}
-          opacity={1}
-          zIndex={99}
-        />
+    <ClickSpark
+      sparkColor="#14b8a6"
+      sparkSize={12}
+      sparkRadius={25}
+      sparkCount={10}
+      duration={500}
+    >
+      <div className="bg-[#080808] text-white min-h-screen relative">
+        <Navbar />
+        <Hero />
+        <StatsSection />
+        <ServicesSection />
+        <ClientsSection />
+        <ApproachSection />
+        <ManifestoSection />
+        <ContactSection />
+        <Footer />
+        <div className={`hidden md:block transition-opacity duration-500 ${atBottom ? 'opacity-0 pointer-events-none' : 'opacity-100'}`}>
+          <GradualBlur
+            target="page"
+            position="bottom"
+            height="4.5rem"
+            curve="bezier"
+            strength={3}
+            divCount={8}
+            exponential={true}
+            opacity={1}
+            zIndex={99}
+          />
+        </div>
       </div>
-    </div>
+    </ClickSpark>
   )
 }
 
