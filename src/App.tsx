@@ -12,6 +12,7 @@ import TiltedCard from './TiltedCard'
 import ClientsSection from './ClientsSection'
 import ServicesSection from './ServicesSection'
 import ClickSpark from './ClickSpark'
+import BorderGlow from './BorderGlow'
 
 
 
@@ -678,9 +679,19 @@ function ManifestoSection() {
         >
           The principles behind every build
         </h2>
-        <div className="rounded-2xl border border-white/10 bg-[#0f0f0f] overflow-hidden">
+        <BorderGlow
+          edgeSensitivity={30}
+          glowColor="320 90 65"
+          backgroundColor="#0f0f14"
+          borderRadius={24}
+          glowRadius={40}
+          glowIntensity={1.2}
+          coneSpread={25}
+          animated={false}
+          colors={['#ec4899', '#a855f7', '#14b8a6']}
+        >
           {principles.map((p, i) => <ManifestoRow key={p.ch} {...p} i={i} />)}
-        </div>
+        </BorderGlow>
       </div>
     </section>
   )
