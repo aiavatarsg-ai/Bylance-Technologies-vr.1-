@@ -1,4 +1,4 @@
-import React, { useRef, useState, useEffect } from 'react'
+import { useRef, useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'motion/react'
 
 export interface ClientScopeItem {
@@ -197,21 +197,16 @@ export default function ClientsSection() {
         >
           {/* Top Bar: Brand, Category, Badge */}
           <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 pb-8 border-b border-white/10">
-            <div className="flex items-center gap-4">
-              <div className="w-14 h-14 rounded-2xl bg-teal-500/10 border border-teal-500/30 flex items-center justify-center font-mono font-bold text-teal-400 text-lg tracking-widest shadow-lg shadow-teal-500/10">
-                ELDEA
+            <div>
+              <div className="flex items-center gap-3 flex-wrap">
+                <h3 style={{ fontFamily: 'Sora, sans-serif' }} className="text-2xl font-bold text-white">
+                  {mainClient.name}
+                </h3>
+                <span className="text-xs font-mono px-3 py-1 rounded-full bg-teal-500/10 border border-teal-500/20 text-teal-300">
+                  {mainClient.category}
+                </span>
               </div>
-              <div>
-                <div className="flex items-center gap-3 flex-wrap">
-                  <h3 style={{ fontFamily: 'Sora, sans-serif' }} className="text-2xl font-bold text-white">
-                    {mainClient.name}
-                  </h3>
-                  <span className="text-xs font-mono px-3 py-1 rounded-full bg-teal-500/10 border border-teal-500/20 text-teal-300">
-                    {mainClient.category}
-                  </span>
-                </div>
-                <p className="text-white/50 text-sm mt-1">{mainClient.tagline}</p>
-              </div>
+              <p className="text-white/50 text-sm mt-1">{mainClient.tagline}</p>
             </div>
 
             <button
