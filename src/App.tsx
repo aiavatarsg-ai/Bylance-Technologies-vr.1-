@@ -101,7 +101,7 @@ function Navbar() {
 
         <a
           href="#contact"
-          className="hidden sm:flex items-center px-4 py-2 sm:px-5 sm:py-2 rounded-full bg-white text-black text-xs sm:text-sm font-semibold hover:bg-teal-400 hover:text-black transition-all duration-200 cursor-target shadow-lg shadow-white/5 pointer-events-auto"
+          className="hidden sm:flex items-center px-4 py-2 sm:px-5 sm:py-2 rounded-full bg-white text-black text-xs sm:text-sm font-semibold hover:bg-teal-400 hover:text-black transition-all duration-200 cursor-target shadow-lg shadow-white/5 pointer-events-auto mr-28 sm:mr-32 min-[1480px]:mr-0"
         >
           Boot a Meet
         </a>
