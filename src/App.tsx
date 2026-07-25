@@ -11,7 +11,6 @@ import CursorGrid from './CursorGrid'
 import TiltedCard from './TiltedCard'
 import ClientsSection from './ClientsSection'
 import ServicesSection from './ServicesSection'
-import CircularGallery from './CircularGallery'
 
 
 
@@ -459,51 +458,6 @@ const steps = [
   { num: '04', title: 'Ship & scale', desc: 'We launch, instrument, and keep improving — handing over a codebase your team can actually own.', color: 'from-amber-400 to-orange-300' },
 ]
 
-const approachGalleryItems = [
-  {
-    num: '01',
-    title: 'Discover',
-    text: 'Discover & Map',
-    desc: 'We pressure-test the idea, map constraints, and align on the smallest version worth building.',
-    accentColor: '#14b8a6',
-  },
-  {
-    num: '02',
-    title: 'Design',
-    text: 'UI/UX Prototyping',
-    desc: 'Interfaces, architecture, and data models take shape as clickable, reviewable artifacts.',
-    accentColor: '#ec4899',
-  },
-  {
-    num: '03',
-    title: 'Build',
-    text: 'Full-Stack Build',
-    desc: 'Tight iterations with visible progress. You see working software every week.',
-    accentColor: '#a855f7',
-  },
-  {
-    num: '04',
-    title: 'Ship & scale',
-    text: 'Ship & Scale',
-    desc: 'We launch, instrument, and keep improving — handing over a codebase your team owns.',
-    accentColor: '#f59e0b',
-  },
-  {
-    num: '05',
-    title: 'AI Integration',
-    text: 'Applied AI',
-    desc: 'Embedding custom RAG pipelines and automated intelligent workflow agents.',
-    accentColor: '#3b82f6',
-  },
-  {
-    num: '06',
-    title: 'Telemetry',
-    text: 'Real-Time Health',
-    desc: 'Continuous uptime monitoring, security audits, and automated scaling.',
-    accentColor: '#10b981',
-  },
-]
-
 function ApproachSection() {
   const ref = useRef<HTMLElement>(null)
   const inView = useInView(ref as React.RefObject<Element>)
@@ -521,7 +475,7 @@ function ApproachSection() {
           </h2>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 mb-14">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
           {steps.map(({ num, title, desc, color }, i) => (
             <div
               key={num}
@@ -559,23 +513,6 @@ function ApproachSection() {
               />
             </div>
           ))}
-        </div>
-
-        {/* Circular Scroll Gallery Integration */}
-        <div className="relative h-[480px] sm:h-[560px] w-full rounded-3xl border border-white/10 bg-[#0d0d0d] overflow-hidden shadow-2xl">
-          <div className="absolute top-6 left-6 z-20 flex items-center gap-2 pointer-events-none">
-            <span className="w-2 h-2 rounded-full bg-pink-400 animate-pulse" />
-            <span className="text-xs font-mono tracking-wider text-white/60 uppercase">Interactive Workflow Gallery — Drag & Scroll</span>
-          </div>
-          <CircularGallery
-            items={approachGalleryItems}
-            bend={2}
-            textColor="#ffffff"
-            borderRadius={0.08}
-            scrollEase={0.02}
-            scrollSpeed={2.2}
-            font="bold 26px Sora"
-          />
         </div>
       </div>
     </section>
