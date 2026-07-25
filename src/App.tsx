@@ -424,24 +424,24 @@ function StatsSection() {
   const inView = useInView(ref as React.RefObject<Element>)
 
   const stats = [
-    { value: '60+', label: 'Projects shipped' },
-    { value: '12', label: 'Countries served' },
-    { value: '1-day', label: 'Response SLA' },
-    { value: '2019', label: 'Established' },
+    { value: '14-Day', label: 'Rapid MVP Sprints' },
+    { value: 'Pixel-Perfect', label: 'High-Fidelity UI/UX' },
+    { value: 'End-to-End', label: 'Web, Mobile & Cloud' },
+    { value: '24/7', label: 'Smart Automation Workflows' },
   ]
 
   return (
     <section className="py-20 px-4" ref={ref}>
-      <div className="max-w-4xl mx-auto">
+      <div className="max-w-5xl mx-auto">
         <div className="grid grid-cols-2 md:grid-cols-4 gap-px bg-white/8 rounded-2xl overflow-hidden border border-white/8">
           {stats.map(({ value, label }, i) => (
             <div
               key={label}
-              className={`bg-[#0d0d0d] p-8 flex flex-col gap-1 transition-all duration-700 ${inView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'}`}
+              className={`bg-[#0d0d0d] p-6 sm:p-8 flex flex-col justify-between gap-2 transition-all duration-700 ${inView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'}`}
               style={{ transitionDelay: `${i * 90}ms` }}
             >
-              <span style={{ fontFamily: 'Sora, sans-serif' }} className="text-3xl font-bold text-white">{value}</span>
-              <span className="text-white/40 text-sm">{label}</span>
+              <span style={{ fontFamily: 'Sora, sans-serif' }} className="text-xl sm:text-2xl md:text-3xl font-bold text-white tracking-tight">{value}</span>
+              <span className="text-white/45 text-xs sm:text-sm font-medium leading-snug">{label}</span>
             </div>
           ))}
         </div>
