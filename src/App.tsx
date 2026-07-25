@@ -229,7 +229,7 @@ function Hero() {
               transform: `rotateX(${imgRotateX}deg) rotateY(${imgRotateY}deg) scale(${imgScale}) translateZ(${imgZ}px)`,
               transformOrigin: 'center bottom',
               transition: 'transform 0.1s cubic-bezier(0.1, 0.9, 0.2, 1)',
-              width: 'min(840px, 90vw)',
+              width: 'min(720px, 86vw)',
               willChange: 'transform',
             }}
           >
@@ -240,27 +240,27 @@ function Hero() {
               }}
             >
               {/* Glossy header bar mock */}
-              <div className="h-9 bg-[#161616]/90 border-b border-white/10 px-4 flex items-center justify-between">
-                <div className="flex items-center gap-2">
-                  <span className="w-2.5 h-2.5 rounded-full bg-red-500/80" />
-                  <span className="w-2.5 h-2.5 rounded-full bg-yellow-500/80" />
-                  <span className="w-2.5 h-2.5 rounded-full bg-green-500/80" />
+              <div className="h-8 bg-[#161616]/90 border-b border-white/10 px-3.5 flex items-center justify-between">
+                <div className="flex items-center gap-1.5">
+                  <span className="w-2 h-2 rounded-full bg-red-500/80" />
+                  <span className="w-2 h-2 rounded-full bg-yellow-500/80" />
+                  <span className="w-2 h-2 rounded-full bg-green-500/80" />
                 </div>
                 <div className="flex items-center gap-1.5">
-                  <div className="w-4 h-4 rounded bg-white p-0.5 flex items-center justify-center">
+                  <div className="w-3.5 h-3.5 rounded bg-white p-0.5 flex items-center justify-center">
                     <img src={logoImg} alt="Logo" className="w-full h-full object-contain" />
                   </div>
-                  <span className="text-[11px] font-mono text-white/50 tracking-wider">bylance.app // studio workspace</span>
+                  <span className="text-[10px] font-mono text-white/50 tracking-wider">bylance.app // studio workspace</span>
                 </div>
-                <div className="w-10" />
+                <div className="w-8" />
               </div>
 
               {/* Interactive AI Studio Workspace Mockup */}
-              <div className="bg-[#09090d] p-5 sm:p-6 text-left border-t border-white/5 font-mono text-xs text-white/80 min-h-[300px] flex flex-col justify-between">
+              <div className="bg-[#09090d] p-4 sm:p-5 text-left border-t border-white/5 font-mono text-xs text-white/80 min-h-[250px] flex flex-col justify-between">
                 {/* Editor Header Bar */}
-                <div className="flex items-center justify-between pb-3.5 border-b border-white/8 text-[11px]">
-                  <div className="flex items-center gap-3">
-                    <span className="px-2.5 py-1 rounded bg-teal-500/10 border border-teal-500/20 text-teal-300 font-semibold">
+                <div className="flex items-center justify-between pb-3 border-b border-white/8 text-[10px] sm:text-[11px]">
+                  <div className="flex items-center gap-2.5">
+                    <span className="px-2 py-0.5 rounded bg-teal-500/10 border border-teal-500/20 text-teal-300 font-semibold">
                       App.tsx
                     </span>
                     <span className="text-white/40 hover:text-white/70 transition-colors cursor-pointer hidden sm:inline">
@@ -272,16 +272,16 @@ function Hero() {
                   </div>
 
                   <div className="flex items-center gap-2">
-                    <span className="w-2 h-2 rounded-full bg-teal-400 animate-pulse" />
-                    <span className="text-teal-400 font-semibold tracking-wide text-[10px]">
+                    <span className="w-1.5 h-1.5 rounded-full bg-teal-400 animate-pulse" />
+                    <span className="text-teal-400 font-semibold tracking-wide text-[9px] sm:text-[10px]">
                       SYSTEM ACTIVE • 99.9% UPTIME
                     </span>
                   </div>
                 </div>
 
                 {/* Simulated Syntax Highlighting & AI Telemetry Grid */}
-                <div className="grid grid-cols-1 md:grid-cols-12 gap-4 py-4 items-center">
-                  <div className="md:col-span-8 bg-[#0d0d14] p-4 rounded-xl border border-white/8 space-y-1.5 font-mono text-[11px] leading-relaxed">
+                <div className="grid grid-cols-1 md:grid-cols-12 gap-3 py-3 items-center">
+                  <div className="md:col-span-8 bg-[#0d0d14] p-3 sm:p-3.5 rounded-xl border border-white/8 space-y-1 font-mono text-[10px] sm:text-[11px] leading-relaxed">
                     <div>
                       <span className="text-purple-400 font-semibold">import</span> &#123;{' '}
                       <span className="text-cyan-300">LangGraph</span>, <span className="text-cyan-300">Gemini</span>,{' '}
@@ -294,36 +294,36 @@ function Hero() {
                       <span className="text-yellow-300">agentStack</span> = <span className="text-purple-400">new</span>{' '}
                       <span className="text-cyan-300">LangGraph</span>(&#123;
                     </div>
-                    <div className="pl-4">
+                    <div className="pl-3">
                       orchestration: <span className="text-emerald-300">'autonomous-search-validation'</span>,
                     </div>
-                    <div className="pl-4">
+                    <div className="pl-3">
                       llms: [<span className="text-teal-300">Gemini.v1_5</span>, <span className="text-teal-300">DeepSeek.r1</span>],
                     </div>
-                    <div className="pl-4">
+                    <div className="pl-3">
                       edgeHost: <span className="text-emerald-300">'cloudflare-pages'</span>,
                     </div>
-                    <div className="pl-4">
+                    <div className="pl-3">
                       crmIntegration: <span className="text-emerald-300">'interakt-whatsapp'</span>
                     </div>
                     <div>&#125;)</div>
                   </div>
 
-                  <div className="md:col-span-4 flex flex-col gap-2.5">
-                    <div className="p-3 rounded-xl bg-teal-500/10 border border-teal-500/20">
-                      <div className="text-[10px] text-teal-300 uppercase tracking-widest mb-0.5 font-mono">Edge Latency</div>
-                      <div className="text-lg font-bold text-white font-sans">14ms Global SLA</div>
+                  <div className="md:col-span-4 flex flex-col gap-2">
+                    <div className="p-2.5 rounded-xl bg-teal-500/10 border border-teal-500/20">
+                      <div className="text-[9px] text-teal-300 uppercase tracking-widest mb-0.5 font-mono">Edge Latency</div>
+                      <div className="text-base font-bold text-white font-sans">14ms Global SLA</div>
                     </div>
-                    <div className="p-3 rounded-xl bg-pink-500/10 border border-pink-500/20">
-                      <div className="text-[10px] text-pink-300 uppercase tracking-widest mb-0.5 font-mono">Agent Validation</div>
-                      <div className="text-sm font-bold text-white font-sans">100% Real-Time</div>
+                    <div className="p-2.5 rounded-xl bg-pink-500/10 border border-pink-500/20">
+                      <div className="text-[9px] text-pink-300 uppercase tracking-widest mb-0.5 font-mono">Agent Validation</div>
+                      <div className="text-xs font-bold text-white font-sans">100% Real-Time</div>
                     </div>
                   </div>
                 </div>
 
                 {/* Editor Footer Bar */}
-                <div className="pt-2.5 border-t border-white/8 flex items-center justify-between text-[10px] text-white/40">
-                  <div className="flex items-center gap-4">
+                <div className="pt-2 border-t border-white/8 flex items-center justify-between text-[9px] text-white/40">
+                  <div className="flex items-center gap-3">
                     <span>UTF-8</span>
                     <span>TypeScript 5.7</span>
                     <span>Cloudflare Edge</span>
@@ -335,8 +335,8 @@ function Hero() {
           </div>
         </div>
 
-        {/* Text — Main Hero Headline & CTAs (Clean spacing below top Navbar) */}
-        <div className="relative z-20 flex flex-col items-center text-center px-4 max-w-4xl mx-auto pt-24 sm:pt-28 md:pt-32 pb-12">
+        {/* Text — Main Hero Headline & CTAs (Sleek compact bounds for 150% display ratio) */}
+        <div className="relative z-20 flex flex-col items-center text-center px-4 max-w-3xl mx-auto pt-20 sm:pt-22 md:pt-24 pb-8">
           <div
             style={{
               transform: `translateY(${textY1}px)`,
@@ -346,7 +346,7 @@ function Hero() {
             <h1
               ref={titleContainerRef}
               style={{ fontFamily: 'Roboto Flex, Sora, sans-serif' }}
-              className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold leading-[1.1] tracking-tight text-white mb-5 drop-shadow-md"
+              className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold leading-[1.1] tracking-tight text-white mb-3.5 drop-shadow-md"
             >
               <VariableProximity
                 label="We design and ship"
@@ -383,9 +383,9 @@ function Hero() {
               transform: `translateY(${textY2}px)`,
               transition: 'transform 0.08s ease-out',
             }}
-            className="flex flex-col items-center gap-6"
+            className="flex flex-col items-center gap-5"
           >
-            <p className="text-white/65 text-base sm:text-lg md:text-xl max-w-2xl leading-relaxed font-normal">
+            <p className="text-white/65 text-sm sm:text-base md:text-lg max-w-xl leading-relaxed font-normal">
               Bylance Technologies partners with ambitious founders and engineering teams to build resilient web, mobile, and cloud products — from initial architecture to scale.
             </p>
 
