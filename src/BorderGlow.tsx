@@ -115,6 +115,7 @@ const BorderGlow: React.FC<BorderGlowProps> = ({
   }, [getCenterOfElement])
 
   const handlePointerMove = useCallback((e: React.PointerEvent<HTMLDivElement>) => {
+    if (typeof window !== 'undefined' && window.innerWidth <= 768) return
     const card = cardRef.current
     if (!card) return
 
@@ -130,6 +131,7 @@ const BorderGlow: React.FC<BorderGlowProps> = ({
   }, [getEdgeProximity, getCursorAngle])
 
   useEffect(() => {
+    if (typeof window !== 'undefined' && window.innerWidth <= 768) return
     if (!animated || !cardRef.current) return
     const card = cardRef.current
     const angleStart = 110

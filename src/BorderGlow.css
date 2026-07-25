@@ -139,3 +139,11 @@
   overflow: hidden;
   z-index: 1;
 }
+
+@media (max-width: 768px) {
+  .edge-light,
+  .border-glow-card::before,
+  .border-glow-card::after {
+    display: none !important;
+  }
+}
