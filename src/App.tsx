@@ -11,6 +11,7 @@ import CursorGrid from './CursorGrid'
 import TiltedCard from './TiltedCard'
 import ClientsSection from './ClientsSection'
 import ServicesSection from './ServicesSection'
+import CircularGallery from './CircularGallery'
 
 
 
@@ -458,6 +459,15 @@ const steps = [
   { num: '04', title: 'Ship & scale', desc: 'We launch, instrument, and keep improving — handing over a codebase your team can actually own.', color: 'from-amber-400 to-orange-300' },
 ]
 
+const approachGalleryItems = [
+  { image: 'https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=800&q=80', text: '01. Discovery & Map' },
+  { image: 'https://images.unsplash.com/photo-1581291518857-4e27b48ff24e?auto=format&fit=crop&w=800&q=80', text: '02. UI/UX Prototyping' },
+  { image: 'https://images.unsplash.com/photo-1517694712202-14dd9538aa97?auto=format&fit=crop&w=800&q=80', text: '03. Full-Stack Build' },
+  { image: 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=800&q=80', text: '04. Ship & Scale' },
+  { image: 'https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?auto=format&fit=crop&w=800&q=80', text: '05. AI Integration' },
+  { image: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=800&q=80', text: '06. Real-Time Telemetry' },
+]
+
 function ApproachSection() {
   const ref = useRef<HTMLElement>(null)
   const inView = useInView(ref as React.RefObject<Element>)
@@ -475,7 +485,7 @@ function ApproachSection() {
           </h2>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 mb-14">
           {steps.map(({ num, title, desc, color }, i) => (
             <div
               key={num}
@@ -513,6 +523,23 @@ function ApproachSection() {
               />
             </div>
           ))}
+        </div>
+
+        {/* Circular Scroll Gallery Integration */}
+        <div className="relative h-[480px] sm:h-[560px] w-full rounded-3xl border border-white/10 bg-[#0d0d0d] overflow-hidden shadow-2xl">
+          <div className="absolute top-6 left-6 z-20 flex items-center gap-2 pointer-events-none">
+            <span className="w-2 h-2 rounded-full bg-pink-400 animate-pulse" />
+            <span className="text-xs font-mono tracking-wider text-white/60 uppercase">Interactive Workflow Gallery — Drag & Scroll</span>
+          </div>
+          <CircularGallery
+            items={approachGalleryItems}
+            bend={2}
+            textColor="#ffffff"
+            borderRadius={0.08}
+            scrollEase={0.02}
+            scrollSpeed={2.2}
+            font="bold 26px Sora"
+          />
         </div>
       </div>
     </section>
