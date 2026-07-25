@@ -78,12 +78,10 @@ const CursorGrid: React.FC<CursorGridProps> = ({
   };
 
   useEffect(() => {
+    if (isMobile) return;
     const container = containerRef.current;
     const canvas = canvasRef.current;
     if (!container || !canvas) return;
-
-    // Skip CursorGrid 60fps canvas render loops on mobile view
-    if (typeof window !== 'undefined' && window.innerWidth <= 768) return;
 
     const ctx = canvas.getContext('2d');
     if (!ctx) return;
@@ -291,7 +289,7 @@ const CursorGrid: React.FC<CursorGridProps> = ({
       window.removeEventListener('pointermove', onWindowPointerMove);
       window.removeEventListener('pointerdown', onWindowPointerDown);
     };
-  }, [cellSize]);
+  }, [cellSize, isMobile]);
 
   useEffect(() => {
     wakeRef.current?.();
