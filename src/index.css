@@ -18,13 +18,13 @@ html {
 /* Proportional website scaling for 150% browser zoom ratio and compact viewports */
 @media (max-width: 1479px) {
   html {
-    font-size: 88.5%;
+    font-size: 80%;
   }
 }
 
 @media (max-height: 850px) {
   html {
-    font-size: 87.5%;
+    font-size: 78.5%;
   }
 }
 
