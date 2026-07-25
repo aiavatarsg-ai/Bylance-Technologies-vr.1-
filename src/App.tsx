@@ -510,15 +510,25 @@ function Hero() {
               </SpecularButton>
             </div>
 
-            {/* Mobile Feature & Trust Metrics (Mobile view only to replace empty space) */}
-            <div className="sm:hidden grid grid-cols-2 gap-3 w-full max-w-sm pt-6 mt-2 border-t border-white/10">
-              <div className="bg-white/[0.04] border border-white/10 rounded-xl p-3 flex flex-col items-center justify-center text-center">
-                <span className="text-teal-400 font-bold text-sm font-mono">14-Day</span>
-                <span className="text-white/60 text-[11px] font-sans mt-0.5">MVP Sprints</span>
-              </div>
-              <div className="bg-white/[0.04] border border-white/10 rounded-xl p-3 flex flex-col items-center justify-center text-center">
-                <span className="text-cyan-400 font-bold text-sm font-mono">99.9%</span>
-                <span className="text-white/60 text-[11px] font-sans mt-0.5">Uptime SLA</span>
+            {/* Mobile Stats Card Grid (Exact 4 stats matching mobile request) */}
+            <div className="sm:hidden w-full max-w-md pt-8 mt-2">
+              <div className="grid grid-cols-2 gap-px bg-white/10 rounded-2xl overflow-hidden border border-white/10 text-left shadow-2xl">
+                <div className="bg-[#0b0b0f] p-4 flex flex-col justify-between gap-1">
+                  <span style={{ fontFamily: 'Sora, sans-serif' }} className="text-base font-bold text-white tracking-tight">14-Day</span>
+                  <span className="text-white/45 text-[11px] font-medium leading-snug">Rapid MVP Sprints</span>
+                </div>
+                <div className="bg-[#0b0b0f] p-4 flex flex-col justify-between gap-1">
+                  <span style={{ fontFamily: 'Sora, sans-serif' }} className="text-base font-bold text-white tracking-tight">Pixel-Perfect</span>
+                  <span className="text-white/45 text-[11px] font-medium leading-snug">High-Fidelity UI/UX</span>
+                </div>
+                <div className="bg-[#0b0b0f] p-4 flex flex-col justify-between gap-1">
+                  <span style={{ fontFamily: 'Sora, sans-serif' }} className="text-base font-bold text-white tracking-tight">End-to-End</span>
+                  <span className="text-white/45 text-[11px] font-medium leading-snug">Web, Mobile & Cloud</span>
+                </div>
+                <div className="bg-[#0b0b0f] p-4 flex flex-col justify-between gap-1">
+                  <span style={{ fontFamily: 'Sora, sans-serif' }} className="text-base font-bold text-white tracking-tight">24/7</span>
+                  <span className="text-white/45 text-[11px] font-medium leading-snug">Smart Automation Workflows</span>
+                </div>
               </div>
             </div>
           </div>
