@@ -60,6 +60,7 @@ export default function TiltedCard({
   const [lastY, setLastY] = useState(0);
 
   function handleMouse(e: React.MouseEvent<HTMLDivElement>) {
+    if (typeof window !== 'undefined' && window.innerWidth <= 768) return;
     if (!ref.current) return;
 
     const rect = ref.current.getBoundingClientRect();
@@ -81,6 +82,7 @@ export default function TiltedCard({
   }
 
   function handleMouseEnter() {
+    if (typeof window !== 'undefined' && window.innerWidth <= 768) return;
     scale.set(scaleOnHover);
     opacity.set(1);
   }
