@@ -373,8 +373,14 @@ function Hero() {
           </div>
         </div>
 
-        {/* Text — Main Hero Headline & CTAs (100% ratio gets original full text-7xl & max-w-4xl) */}
-        <div className="relative z-20 flex flex-col items-center text-center px-4 max-w-4xl mx-auto pt-20 sm:pt-24 md:pt-28 min-[1480px]:pt-32 pb-8">
+        {/* Text — Main Hero Headline & CTAs */}
+        <div className="relative z-20 flex flex-col items-center text-center px-4 max-w-4xl mx-auto pt-16 sm:pt-24 md:pt-28 min-[1480px]:pt-32 pb-8">
+          {/* Top Pill Badge (Mobile & Desktop) */}
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-teal-500/10 border border-teal-500/20 text-teal-300 text-xs font-mono font-medium mb-5 sm:mb-6 backdrop-blur-md shadow-sm">
+            <span className="w-1.5 h-1.5 rounded-full bg-teal-400 animate-pulse" />
+            <span>AI-Native Software Engineering Studio</span>
+          </div>
+
           <div
             style={{
               transform: `translateY(${textY1}px)`,
@@ -384,7 +390,7 @@ function Hero() {
             <h1
               ref={titleContainerRef}
               style={{ fontFamily: 'Roboto Flex, Sora, sans-serif' }}
-              className="text-4xl sm:text-5xl md:text-6xl min-[1480px]:text-7xl font-bold leading-[1.1] tracking-tight text-white mb-4 min-[1480px]:mb-5 drop-shadow-md"
+              className="text-3xl xs:text-4xl sm:text-5xl md:text-6xl min-[1480px]:text-7xl font-bold leading-[1.15] sm:leading-[1.1] tracking-tight text-white mb-4 min-[1480px]:mb-5 drop-shadow-md"
             >
               <VariableProximity
                 label="We design and ship"
@@ -502,6 +508,18 @@ function Hero() {
               >
                 Our Clients
               </SpecularButton>
+            </div>
+
+            {/* Mobile Feature & Trust Metrics (Mobile view only to replace empty space) */}
+            <div className="sm:hidden grid grid-cols-2 gap-3 w-full max-w-sm pt-6 mt-2 border-t border-white/10">
+              <div className="bg-white/[0.04] border border-white/10 rounded-xl p-3 flex flex-col items-center justify-center text-center">
+                <span className="text-teal-400 font-bold text-sm font-mono">14-Day</span>
+                <span className="text-white/60 text-[11px] font-sans mt-0.5">MVP Sprints</span>
+              </div>
+              <div className="bg-white/[0.04] border border-white/10 rounded-xl p-3 flex flex-col items-center justify-center text-center">
+                <span className="text-cyan-400 font-bold text-sm font-mono">99.9%</span>
+                <span className="text-white/60 text-[11px] font-sans mt-0.5">Uptime SLA</span>
+              </div>
             </div>
           </div>
         </div>
