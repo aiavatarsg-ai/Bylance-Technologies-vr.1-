@@ -1,4 +1,4 @@
-import React, { useRef, useEffect } from 'react';
+import React, { useRef, useEffect, useState } from 'react';
 import './CursorGrid.css';
 
 const FALLOFF_CURVES: Record<string, (t: number) => number> = {
@@ -51,6 +51,15 @@ const CursorGrid: React.FC<CursorGridProps> = ({
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const propsRef = useRef<any>({});
   const wakeRef = useRef<(() => void) | null>(null);
+
+  const [isMobile, setIsMobile] = useState<boolean>(false);
+
+  useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth <= 768);
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
 
   propsRef.current = {
     cellSize,
@@ -287,6 +296,8 @@ const CursorGrid: React.FC<CursorGridProps> = ({
   useEffect(() => {
     wakeRef.current?.();
   }, [gridOpacity, color, lineWidth, maxOpacity, fillOpacity, cellRadius]);
+
+  if (isMobile) return null;
 
   return (
     <div ref={containerRef} className={`cursor-grid${className ? ` ${className}` : ''}`}>
