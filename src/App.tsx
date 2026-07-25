@@ -455,52 +455,68 @@ const steps = [
   {
     num: '01',
     title: 'Discover',
+    actionLabel: 'Start Discovery',
     shortDesc: 'We pressure-test the idea, map constraints, and align on the smallest version worth building.',
     fullDesc: 'We kick off with a rigorous deep dive into your product requirements, user demographics, and technical constraints. Rather than diving blindly into code, we focus on scoping an elite Minimum Viable Product (MVP). By identifying potential technical roadblocks early, defining core data schemas, and mapping out the user journey, we establish a crystal-clear, risk-mitigated development roadmap before a single line of code is written.',
     color: 'from-teal-400 to-cyan-300',
+    accentBorder: 'hover:border-teal-500/40',
+    btnClass: 'bg-teal-500/10 border-teal-500/30 text-teal-300 hover:bg-teal-500/20 hover:border-teal-400',
   },
   {
     num: '02',
     title: 'Design',
+    actionLabel: 'Start Design',
     shortDesc: 'Interfaces, architecture, and data models take shape as clickable, reviewable artifacts — not guesswork.',
     fullDesc: 'This phase translates abstract requirements into tangible, high-fidelity visuals and structured architecture. We build interactive Figma wireframes and clickable prototypes featuring sleek, modern UI aesthetics. Concurrently, our engineering team designs the underlying database schemas, API routes, and cloud infrastructure layout. You see exactly how the product will look, feel, and function, leaving absolutely zero room for guesswork.',
     color: 'from-pink-400 to-rose-300',
+    accentBorder: 'hover:border-pink-500/40',
+    btnClass: 'bg-pink-500/10 border-pink-500/30 text-pink-300 hover:bg-pink-500/20 hover:border-pink-400',
   },
   {
     num: '03',
     title: 'Build',
+    actionLabel: 'Start Build',
     shortDesc: 'Tight iterations with visible progress. You see working software every week, not just status decks.',
     fullDesc: 'We shift into rapid, iterative development cycles driven by clean engineering practices. Working in tight weekly sprints, we turn the approved blueprints into high-performance web platforms or cross-platform mobile apps. You receive direct access to a staging environment with fully functioning software updates every single week—letting you touch, test, and critique the progress in real time instead of reading static status reports.',
     color: 'from-violet-400 to-purple-300',
+    accentBorder: 'hover:border-violet-500/40',
+    btnClass: 'bg-violet-500/10 border-violet-500/30 text-violet-300 hover:bg-violet-500/20 hover:border-violet-400',
   },
   {
     num: '04',
     title: 'Ship & Scale',
+    actionLabel: 'Start Shipping',
     shortDesc: 'We launch, instrument, and keep improving — handing over a codebase your team can actually own.',
     fullDesc: 'Launch day is just the beginning. We manage the entire deployment pipeline, configuring your domain routing, optimizing cloud hosting environments, and setting up automated production monitors. Once live, we hand over a completely documented, highly modular codebase. We stay close to analyze real-world performance metrics, refine features based on actual user feedback, and ensure your system seamlessly scales as your client base explodes.',
     color: 'from-amber-400 to-orange-300',
+    accentBorder: 'hover:border-amber-500/40',
+    btnClass: 'bg-amber-500/10 border-amber-500/30 text-amber-300 hover:bg-amber-500/20 hover:border-amber-400',
   },
 ]
 
 function ApproachCard({
   num,
   title,
+  actionLabel,
   shortDesc,
   fullDesc,
   color,
+  accentBorder,
+  btnClass,
   i,
   inView,
 }: {
   num: string
   title: string
+  actionLabel: string
   shortDesc: string
   fullDesc: string
   color: string
+  accentBorder: string
+  btnClass: string
   i: number
   inView: boolean
 }) {
-  const [isExpanded, setIsExpanded] = useState(false)
-
   return (
     <div
       className="transition-all duration-700 h-full flex flex-col"
@@ -516,19 +532,13 @@ function ApproachCard({
         containerWidth="100%"
         imageHeight="100%"
         imageWidth="100%"
-        rotateAmplitude={isExpanded ? 0 : 12}
-        scaleOnHover={isExpanded ? 1.01 : 1.03}
+        rotateAmplitude={10}
+        scaleOnHover={1.02}
         showMobileWarning={false}
-        showTooltip={!isExpanded}
+        showTooltip={false}
         displayOverlayContent={true}
         overlayContent={
-          <div
-            onClick={() => setIsExpanded(!isExpanded)}
-            className={`p-6 rounded-2xl bg-[#111]/90 backdrop-blur-md border border-white/10 hover:border-pink-500/40 transition-all duration-300 ease-in-out h-full flex flex-col justify-between shadow-2xl cursor-pointer ${
-              isExpanded ? 'bg-[#15151e]/95 border-pink-500/50 shadow-pink-500/10' : ''
-            }`}
-            style={{ transition: 'all 0.3s ease-in-out' }}
-          >
+          <div className={`p-6 rounded-2xl bg-[#111]/95 backdrop-blur-md border border-white/10 ${accentBorder} transition-all duration-300 h-full flex flex-col justify-between shadow-2xl`}>
             <div>
               <div className="flex items-center justify-between gap-2 mb-4">
                 <span
@@ -540,50 +550,36 @@ function ApproachCard({
                 <span className="text-xs font-mono text-white/30">Phase {i + 1} of 4</span>
               </div>
 
-              <h3 style={{ fontFamily: 'Sora, sans-serif' }} className="text-white font-semibold text-lg mb-3">
+              <h3 style={{ fontFamily: 'Sora, sans-serif' }} className="text-white font-semibold text-xl mb-3">
                 {title}
               </h3>
 
-              <p className="text-white/60 text-sm leading-relaxed mb-3">
+              <p className="text-white/80 text-sm leading-relaxed mb-4 font-medium">
                 {shortDesc}
               </p>
 
-              {/* Smoothly Expanded Deep Dive Paragraph */}
-              <div
-                className={`overflow-hidden transition-all duration-300 ease-in-out ${
-                  isExpanded ? 'max-h-[500px] opacity-100 mt-4 pt-4 border-t border-white/10' : 'max-h-0 opacity-0'
-                }`}
-                style={{ transition: 'all 0.3s ease-in-out' }}
-              >
-                <p className="text-white/80 text-xs sm:text-sm leading-relaxed font-normal">
+              {/* Full Deep Dive Paragraph - Displayed by default */}
+              <div className="pt-4 border-t border-white/10">
+                <p className="text-white/55 text-xs sm:text-sm leading-relaxed font-normal">
                   {fullDesc}
                 </p>
               </div>
             </div>
 
-            {/* Read More / Show Less Toggle Footer */}
-            <div className="mt-6 flex items-center justify-between text-xs text-white/30 pt-4 border-t border-white/8 font-mono">
+            {/* Action Button Redirecting to Contact Section */}
+            <div className="mt-6 pt-4 border-t border-white/8">
               <button
                 type="button"
-                onClick={(e) => {
-                  e.stopPropagation()
-                  setIsExpanded(!isExpanded)
+                onClick={() => {
+                  document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })
                 }}
-                className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-pink-400 hover:text-pink-300 transition-colors cursor-pointer"
+                className={`w-full py-3 px-4 rounded-xl border ${btnClass} font-semibold text-xs uppercase tracking-wider transition-all duration-300 flex items-center justify-center gap-2 cursor-pointer shadow-lg`}
               >
-                {isExpanded ? 'Show Less' : 'Read More'}
-                <svg
-                  className={`w-3.5 h-3.5 transition-transform duration-300 ${isExpanded ? 'rotate-180' : ''}`}
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                  strokeWidth={2.2}
-                >
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
+                {actionLabel}
+                <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.2}>
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
                 </svg>
               </button>
-
-              <span className="text-pink-400/80 font-medium">{isExpanded ? 'Deep Dive' : 'Sprint →'}</span>
             </div>
           </div>
         }
