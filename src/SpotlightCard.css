@@ -27,3 +27,9 @@
 .card-spotlight:focus-within::before {
   opacity: 0.8;
 }
+
+@media (max-width: 768px) {
+  .card-spotlight::before {
+    display: none !important;
+  }
+}

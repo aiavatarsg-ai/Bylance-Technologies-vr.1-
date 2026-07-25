@@ -17,6 +17,7 @@ const SpotlightCard: React.FC<SpotlightCardProps> = ({
   const divRef = useRef<HTMLDivElement>(null)
 
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (typeof window !== 'undefined' && window.innerWidth <= 768) return
     if (!divRef.current) return
     const rect = divRef.current.getBoundingClientRect()
     const x = e.clientX - rect.left
