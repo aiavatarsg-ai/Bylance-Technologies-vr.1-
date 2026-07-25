@@ -73,6 +73,9 @@ const CursorGrid: React.FC<CursorGridProps> = ({
     const canvas = canvasRef.current;
     if (!container || !canvas) return;
 
+    // Skip CursorGrid 60fps canvas render loops on mobile view
+    if (typeof window !== 'undefined' && window.innerWidth <= 768) return;
+
     const ctx = canvas.getContext('2d');
     if (!ctx) return;
     const dpr = Math.min(window.devicePixelRatio || 1, 2);
