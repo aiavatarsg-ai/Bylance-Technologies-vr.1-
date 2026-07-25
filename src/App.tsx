@@ -236,12 +236,12 @@ function Hero() {
           <div className="absolute top-1/2 right-1/4 w-[500px] h-[500px] bg-cyan-500/8 rounded-full blur-[130px] pointer-events-none" />
         </div>
 
-        {/* Hero image — scroll & mouse driven 3D perspective tilt */}
+        {/* Hero image — scroll & mouse driven 3D perspective tilt (Desktop only) */}
         <div
+          className="hidden sm:flex"
           style={{
             perspective: '1300px',
             width: '100%',
-            display: 'flex',
             justifyContent: 'center',
             position: 'absolute',
             bottom: 0,
