@@ -112,7 +112,7 @@ function Navbar() {
   return (
     <>
       {/* Top Header Bar */}
-      <header className="fixed top-0 left-0 right-0 z-40 flex items-center justify-between px-6 py-5 sm:px-10 sm:py-6 pointer-events-none">
+      <header className="fixed top-0 left-0 right-0 z-40 flex items-center justify-between px-4 sm:px-10 py-4 sm:py-6 pointer-events-none w-full max-w-full overflow-hidden">
         <a href="#" className="flex items-center gap-2.5 cursor-target pointer-events-auto group">
           <div className="w-8 h-8 rounded-lg bg-white p-0.5 border border-white/20 flex items-center justify-center flex-shrink-0 shadow-sm overflow-hidden group-hover:scale-105 transition-transform duration-200">
             <img src={logoImg} alt="Bylance Technologies Logo" className="w-full h-full object-contain rounded-md" />
@@ -124,7 +124,7 @@ function Navbar() {
 
         <a
           href="#contact"
-          className="hidden sm:flex items-center px-4 py-2 sm:px-5 sm:py-2 rounded-full bg-white text-black text-xs sm:text-sm font-semibold hover:bg-teal-400 hover:text-black transition-all duration-200 cursor-target shadow-lg shadow-white/5 pointer-events-auto mr-28 sm:mr-32 min-[1480px]:mr-0"
+          className="hidden sm:flex items-center px-4 py-2 sm:px-5 sm:py-2 rounded-full bg-white text-black text-xs sm:text-sm font-semibold hover:bg-teal-400 hover:text-black transition-all duration-200 cursor-target shadow-lg shadow-white/5 pointer-events-auto sm:mr-32 min-[1480px]:mr-0"
         >
           Boot a Meet
         </a>
@@ -215,11 +215,11 @@ function Hero() {
   const textY2 = isMobile ? 0 : (1 - p) * 18
 
   return (
-    <div ref={pinRef} id="hero" style={{ height: isMobile ? 'auto' : '220vh' }} className="relative bg-[#080808]">
+    <div ref={pinRef} id="hero" style={{ height: isMobile ? 'auto' : '220vh' }} className="relative bg-[#080808] overflow-x-hidden max-w-full">
       <div
         className={
           isMobile
-            ? 'relative w-full min-h-[85vh] py-24 px-4 flex flex-col items-center justify-center text-center grid-bg select-none z-10'
+            ? 'relative w-full max-w-full overflow-x-hidden min-h-[85vh] py-24 px-4 flex flex-col items-center justify-center text-center grid-bg select-none z-10'
             : 'sticky top-0 h-screen overflow-hidden flex flex-col items-center justify-between grid-bg select-none'
         }
         onMouseMove={handleMouseMove}
@@ -244,10 +244,10 @@ function Hero() {
         </div>
 
         {/* Ambient background glows & floating kinetic orbs */}
-        <div className="absolute inset-0 pointer-events-none">
-          <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[700px] h-[500px] bg-teal-500/10 rounded-full blur-[140px] pointer-events-none" />
-          <div className="absolute top-1/3 left-1/4 w-[450px] h-[450px] bg-pink-500/8 rounded-full blur-[120px] pointer-events-none" />
-          <div className="absolute top-1/2 right-1/4 w-[500px] h-[500px] bg-cyan-500/8 rounded-full blur-[130px] pointer-events-none" />
+        <div className="absolute inset-0 pointer-events-none overflow-hidden max-w-full">
+          <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-full max-w-[700px] h-[500px] bg-teal-500/10 rounded-full blur-[140px] pointer-events-none" />
+          <div className="absolute top-1/3 left-1/4 w-full max-w-[450px] h-[450px] bg-pink-500/8 rounded-full blur-[120px] pointer-events-none" />
+          <div className="absolute top-1/2 right-1/4 w-full max-w-[500px] h-[500px] bg-cyan-500/8 rounded-full blur-[130px] pointer-events-none" />
         </div>
 
         {/* Hero image — scroll & mouse driven 3D perspective tilt (Desktop only) */}
@@ -1091,7 +1091,7 @@ export default function App() {
       sparkCount={10}
       duration={500}
     >
-      <div className="bg-[#080808] text-white min-h-screen relative">
+      <div className="bg-[#080808] text-white min-h-screen relative overflow-x-hidden w-full max-w-full">
         <Navbar />
         <Hero />
         <StatsSection />
