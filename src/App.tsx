@@ -510,9 +510,9 @@ function Hero() {
               </SpecularButton>
             </div>
 
-            {/* Mobile Stats Card Grid (Exact 4 stats matching mobile request) */}
-            <div className="sm:hidden w-full max-w-md pt-8 mt-2">
-              <div className="grid grid-cols-2 gap-px bg-white/10 rounded-2xl overflow-hidden border border-white/10 text-left shadow-2xl">
+            {/* Mobile Stats Card Grid (Full width on mobile view) */}
+            <div className="sm:hidden w-full max-w-full pt-8 mt-2 px-1">
+              <div className="grid grid-cols-2 gap-px bg-white/10 rounded-2xl overflow-hidden border border-white/10 text-left shadow-2xl w-full">
                 <div className="bg-[#0b0b0f] p-4 flex flex-col justify-between gap-1">
                   <span style={{ fontFamily: 'Sora, sans-serif' }} className="text-base font-bold text-white tracking-tight">14-Day</span>
                   <span className="text-white/45 text-[11px] font-medium leading-snug">Rapid MVP Sprints</span>
