@@ -680,13 +680,14 @@ function ManifestoSection() {
           The principles behind every build
         </h2>
         <BorderGlow
-          edgeSensitivity={30}
-          glowColor="320 90 65"
-          backgroundColor="#0f0f14"
+          edgeSensitivity={45}
+          glowColor="320 70 60"
+          backgroundColor="#0e0e12"
           borderRadius={24}
-          glowRadius={40}
-          glowIntensity={1.2}
-          coneSpread={25}
+          glowRadius={20}
+          glowIntensity={0.35}
+          fillOpacity={0.12}
+          coneSpread={20}
           animated={false}
           colors={['#ec4899', '#a855f7', '#14b8a6']}
         >
