@@ -565,7 +565,7 @@ function StatsSection() {
   ]
 
   return (
-    <section className="py-20 px-4" ref={ref}>
+    <section className="hidden sm:block py-20 px-4" ref={ref}>
       <div className="max-w-5xl mx-auto">
         <div className="grid grid-cols-2 md:grid-cols-4 gap-px bg-white/8 rounded-2xl overflow-hidden border border-white/8">
           {stats.map(({ value, label }, i) => (
