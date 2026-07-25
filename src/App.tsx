@@ -452,11 +452,145 @@ function StatsSection() {
 // ─── Approach — horizontal 3D flip-in ────────────────────────────────────────
 
 const steps = [
-  { num: '01', title: 'Discover', desc: 'We pressure-test the idea, map constraints, and align on the smallest version worth building.', color: 'from-teal-400 to-cyan-300' },
-  { num: '02', title: 'Design', desc: 'Interfaces, architecture, and data models take shape as clickable, reviewable artifacts — not guesswork.', color: 'from-pink-400 to-rose-300' },
-  { num: '03', title: 'Build', desc: 'Tight iterations with visible progress. You see working software every week, not just status decks.', color: 'from-violet-400 to-purple-300' },
-  { num: '04', title: 'Ship & scale', desc: 'We launch, instrument, and keep improving — handing over a codebase your team can actually own.', color: 'from-amber-400 to-orange-300' },
+  {
+    num: '01',
+    title: 'Discover',
+    shortDesc: 'We pressure-test the idea, map constraints, and align on the smallest version worth building.',
+    fullDesc: 'We kick off with a rigorous deep dive into your product requirements, user demographics, and technical constraints. Rather than diving blindly into code, we focus on scoping an elite Minimum Viable Product (MVP). By identifying potential technical roadblocks early, defining core data schemas, and mapping out the user journey, we establish a crystal-clear, risk-mitigated development roadmap before a single line of code is written.',
+    color: 'from-teal-400 to-cyan-300',
+  },
+  {
+    num: '02',
+    title: 'Design',
+    shortDesc: 'Interfaces, architecture, and data models take shape as clickable, reviewable artifacts — not guesswork.',
+    fullDesc: 'This phase translates abstract requirements into tangible, high-fidelity visuals and structured architecture. We build interactive Figma wireframes and clickable prototypes featuring sleek, modern UI aesthetics. Concurrently, our engineering team designs the underlying database schemas, API routes, and cloud infrastructure layout. You see exactly how the product will look, feel, and function, leaving absolutely zero room for guesswork.',
+    color: 'from-pink-400 to-rose-300',
+  },
+  {
+    num: '03',
+    title: 'Build',
+    shortDesc: 'Tight iterations with visible progress. You see working software every week, not just status decks.',
+    fullDesc: 'We shift into rapid, iterative development cycles driven by clean engineering practices. Working in tight weekly sprints, we turn the approved blueprints into high-performance web platforms or cross-platform mobile apps. You receive direct access to a staging environment with fully functioning software updates every single week—letting you touch, test, and critique the progress in real time instead of reading static status reports.',
+    color: 'from-violet-400 to-purple-300',
+  },
+  {
+    num: '04',
+    title: 'Ship & Scale',
+    shortDesc: 'We launch, instrument, and keep improving — handing over a codebase your team can actually own.',
+    fullDesc: 'Launch day is just the beginning. We manage the entire deployment pipeline, configuring your domain routing, optimizing cloud hosting environments, and setting up automated production monitors. Once live, we hand over a completely documented, highly modular codebase. We stay close to analyze real-world performance metrics, refine features based on actual user feedback, and ensure your system seamlessly scales as your client base explodes.',
+    color: 'from-amber-400 to-orange-300',
+  },
 ]
+
+function ApproachCard({
+  num,
+  title,
+  shortDesc,
+  fullDesc,
+  color,
+  i,
+  inView,
+}: {
+  num: string
+  title: string
+  shortDesc: string
+  fullDesc: string
+  color: string
+  i: number
+  inView: boolean
+}) {
+  const [isExpanded, setIsExpanded] = useState(false)
+
+  return (
+    <div
+      className="transition-all duration-700 h-full flex flex-col"
+      style={{
+        transitionDelay: `${i * 90}ms`,
+        opacity: inView ? 1 : 0,
+        transform: inView ? 'translateY(0)' : 'translateY(32px)',
+      }}
+    >
+      <TiltedCard
+        captionText={`Phase ${num} — ${title}`}
+        containerHeight="100%"
+        containerWidth="100%"
+        imageHeight="100%"
+        imageWidth="100%"
+        rotateAmplitude={isExpanded ? 0 : 12}
+        scaleOnHover={isExpanded ? 1.01 : 1.03}
+        showMobileWarning={false}
+        showTooltip={!isExpanded}
+        displayOverlayContent={true}
+        overlayContent={
+          <div
+            onClick={() => setIsExpanded(!isExpanded)}
+            className={`p-6 rounded-2xl bg-[#111]/90 backdrop-blur-md border border-white/10 hover:border-pink-500/40 transition-all duration-300 ease-in-out h-full flex flex-col justify-between shadow-2xl cursor-pointer ${
+              isExpanded ? 'bg-[#15151e]/95 border-pink-500/50 shadow-pink-500/10' : ''
+            }`}
+            style={{ transition: 'all 0.3s ease-in-out' }}
+          >
+            <div>
+              <div className="flex items-center justify-between gap-2 mb-4">
+                <span
+                  style={{ fontFamily: 'JetBrains Mono, monospace' }}
+                  className={`text-3xl font-bold bg-gradient-to-r ${color} bg-clip-text text-transparent block`}
+                >
+                  {num}
+                </span>
+                <span className="text-xs font-mono text-white/30">Phase {i + 1} of 4</span>
+              </div>
+
+              <h3 style={{ fontFamily: 'Sora, sans-serif' }} className="text-white font-semibold text-lg mb-3">
+                {title}
+              </h3>
+
+              <p className="text-white/60 text-sm leading-relaxed mb-3">
+                {shortDesc}
+              </p>
+
+              {/* Smoothly Expanded Deep Dive Paragraph */}
+              <div
+                className={`overflow-hidden transition-all duration-300 ease-in-out ${
+                  isExpanded ? 'max-h-[500px] opacity-100 mt-4 pt-4 border-t border-white/10' : 'max-h-0 opacity-0'
+                }`}
+                style={{ transition: 'all 0.3s ease-in-out' }}
+              >
+                <p className="text-white/80 text-xs sm:text-sm leading-relaxed font-normal">
+                  {fullDesc}
+                </p>
+              </div>
+            </div>
+
+            {/* Read More / Show Less Toggle Footer */}
+            <div className="mt-6 flex items-center justify-between text-xs text-white/30 pt-4 border-t border-white/8 font-mono">
+              <button
+                type="button"
+                onClick={(e) => {
+                  e.stopPropagation()
+                  setIsExpanded(!isExpanded)
+                }}
+                className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-pink-400 hover:text-pink-300 transition-colors cursor-pointer"
+              >
+                {isExpanded ? 'Show Less' : 'Read More'}
+                <svg
+                  className={`w-3.5 h-3.5 transition-transform duration-300 ${isExpanded ? 'rotate-180' : ''}`}
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                  strokeWidth={2.2}
+                >
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
+                </svg>
+              </button>
+
+              <span className="text-pink-400/80 font-medium">{isExpanded ? 'Deep Dive' : 'Sprint →'}</span>
+            </div>
+          </div>
+        }
+      />
+    </div>
+  )
+}
 
 function ApproachSection() {
   const ref = useRef<HTMLElement>(null)
@@ -475,43 +609,9 @@ function ApproachSection() {
           </h2>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
-          {steps.map(({ num, title, desc, color }, i) => (
-            <div
-              key={num}
-              className="transition-all duration-700 h-full flex flex-col min-h-[260px]"
-              style={{
-                transitionDelay: `${i * 90}ms`,
-                opacity: inView ? 1 : 0,
-                transform: inView ? 'translateY(0)' : 'translateY(32px)',
-              }}
-            >
-              <TiltedCard
-                captionText={`Phase ${num} — ${title}`}
-                containerHeight="100%"
-                containerWidth="100%"
-                imageHeight="100%"
-                imageWidth="100%"
-                rotateAmplitude={18}
-                scaleOnHover={1.05}
-                showMobileWarning={false}
-                showTooltip={true}
-                displayOverlayContent={true}
-                overlayContent={
-                  <div className="p-6 rounded-2xl bg-[#111]/90 backdrop-blur-md border border-white/10 hover:border-pink-500/40 transition-colors duration-300 h-full flex flex-col justify-between shadow-2xl min-h-[260px]">
-                    <div>
-                      <span style={{ fontFamily: 'JetBrains Mono, monospace' }} className={`text-3xl font-bold bg-gradient-to-r ${color} bg-clip-text text-transparent block mb-4`}>{num}</span>
-                      <h3 style={{ fontFamily: 'Sora, sans-serif' }} className="text-white font-semibold text-lg mb-3">{title}</h3>
-                      <p className="text-white/50 text-sm leading-relaxed">{desc}</p>
-                    </div>
-                    <div className="mt-6 flex items-center justify-between text-xs text-white/30 pt-4 border-t border-white/8 font-mono">
-                      <span>Phase {i + 1} of 4</span>
-                      <span className="text-pink-400 font-medium">Sprint →</span>
-                    </div>
-                  </div>
-                }
-              />
-            </div>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 items-start">
+          {steps.map((step, i) => (
+            <ApproachCard key={step.num} {...step} i={i} inView={inView} />
           ))}
         </div>
       </div>
