@@ -1,6 +1,7 @@
 import React, { useRef, useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'motion/react'
 import CursorGrid from './CursorGrid'
+import SpotlightCard from './SpotlightCard'
 
 export interface ServiceCardData {
   num: string
@@ -184,7 +185,10 @@ export default function ServicesSection() {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4" style={{ perspective: '1000px' }}>
           {serviceCardsData.map((service, i) => (
             <Card3D key={service.title} delay={i * 65}>
-              <div className="group p-6 rounded-2xl bg-[#111] border border-white/8 hover:border-teal-500/30 hover:bg-[#131c1f] transition-all duration-300 h-full flex flex-col justify-between">
+              <SpotlightCard
+                spotlightColor={`${service.accentColor}40`}
+                className="group p-6 rounded-2xl border border-white/8 hover:border-teal-500/30 hover:bg-[#131c1f] transition-all duration-300 h-full flex flex-col justify-between"
+              >
                 <div>
                   <div className="flex items-center justify-between gap-2 mb-5">
                     <div className="w-10 h-10 rounded-xl bg-[#0d1f1e] border border-teal-500/20 flex items-center justify-center text-teal-400 group-hover:bg-teal-500/10 transition-colors">
@@ -204,7 +208,7 @@ export default function ServicesSection() {
                 </div>
 
                 {/* Learn More Button */}
-                <div className="pt-4 border-t border-white/5 flex items-center justify-between">
+                <div className="pt-4 border-t border-white/5 flex items-center justify-between relative z-10">
                   <button
                     onClick={() => setSelectedService(service)}
                     className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-teal-400 group-hover:text-teal-300 transition-colors cursor-pointer"
@@ -217,7 +221,7 @@ export default function ServicesSection() {
 
                   <span className="w-2 h-2 rounded-full bg-white/10 group-hover:bg-teal-400 transition-colors" />
                 </div>
-              </div>
+              </SpotlightCard>
             </Card3D>
           ))}
         </div>
