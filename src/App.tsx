@@ -177,14 +177,14 @@ function Hero() {
   const imgZ       = (1 - p) * -60
   const imgShadowOpacity = 0.35 + p * 0.45
 
-  // Subtle text parallax translation (no opacity fading)
-  const textY1 = (1 - p) * 35
-  const textY2 = (1 - p) * 55
+  // Subtle text parallax translation
+  const textY1 = (1 - p) * 10
+  const textY2 = (1 - p) * 18
 
   return (
     <div ref={pinRef} id="hero" style={{ height: '220vh' }} className="relative">
       <div
-        className="sticky top-0 h-screen overflow-hidden flex flex-col items-center justify-center grid-bg select-none"
+        className="sticky top-0 h-screen overflow-hidden flex flex-col items-center justify-between grid-bg select-none"
         onMouseMove={handleMouseMove}
         onMouseLeave={handleMouseLeave}
       >
@@ -230,7 +230,7 @@ function Hero() {
               transform: `rotateX(${imgRotateX}deg) rotateY(${imgRotateY}deg) scale(${imgScale}) translateZ(${imgZ}px)`,
               transformOrigin: 'center bottom',
               transition: 'transform 0.1s cubic-bezier(0.1, 0.9, 0.2, 1)',
-              width: 'min(860px, 92vw)',
+              width: 'min(840px, 90vw)',
               willChange: 'transform',
             }}
           >
@@ -257,8 +257,8 @@ function Hero() {
               </div>
 
               {/* Showcase Image */}
-              <div className="relative group">
-                <div className="absolute inset-0 bg-gradient-to-t from-[#080808] via-transparent to-transparent z-10 pointer-events-none" />
+              <div className="relative group overflow-hidden">
+                <div className="absolute inset-0 bg-[#080808]/75 backdrop-blur-[1.5px] z-10 pointer-events-none group-hover:bg-[#080808]/50 transition-all duration-500" />
                 <img
                   src={img1}
                   alt="Bylance platform"
@@ -269,8 +269,8 @@ function Hero() {
           </div>
         </div>
 
-        {/* Text — Layer 1 (Headline & Badge - 100% crisp visibility) */}
-        <div className="relative z-20 flex flex-col items-center text-center px-4 max-w-5xl mx-auto pb-[42vh]">
+        {/* Text — Main Hero Headline & CTAs (Clean spacing below top Navbar) */}
+        <div className="relative z-20 flex flex-col items-center text-center px-4 max-w-4xl mx-auto pt-24 sm:pt-28 md:pt-32 pb-12">
           <div
             style={{
               transform: `translateY(${textY1}px)`,
@@ -280,7 +280,7 @@ function Hero() {
             <h1
               ref={titleContainerRef}
               style={{ fontFamily: 'Roboto Flex, Sora, sans-serif' }}
-              className="text-5xl sm:text-6xl md:text-7xl font-bold leading-[1.07] tracking-tight text-white mb-6 drop-shadow-sm"
+              className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold leading-[1.1] tracking-tight text-white mb-5 drop-shadow-md"
             >
               <VariableProximity
                 label="We design and ship"
@@ -311,15 +311,15 @@ function Hero() {
             </h1>
           </div>
 
-          {/* Text — Layer 2 (Description & CTAs - 100% crisp visibility) */}
+          {/* Text — Layer 2 (Description & CTAs) */}
           <div
             style={{
               transform: `translateY(${textY2}px)`,
               transition: 'transform 0.08s ease-out',
             }}
-            className="flex flex-col items-center gap-7"
+            className="flex flex-col items-center gap-6"
           >
-            <p className="text-white/60 text-lg sm:text-xl max-w-2xl leading-relaxed font-normal">
+            <p className="text-white/65 text-base sm:text-lg md:text-xl max-w-2xl leading-relaxed font-normal">
               Bylance Technologies partners with ambitious founders and engineering teams to build resilient web, mobile, and cloud products — from initial architecture to scale.
             </p>
 
