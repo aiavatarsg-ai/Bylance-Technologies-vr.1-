@@ -3,3 +3,7 @@ dist
 .DS_Store
 *.local
 .env
+.figma
+.vscode
+AGENTS.md
+CLAUDE.md
