@@ -36,6 +36,9 @@ const ClickSpark: React.FC<ClickSparkProps> = ({
     const canvas = canvasRef.current
     if (!canvas) return
 
+    // Skip canvas spark setup on mobile view
+    if (typeof window !== 'undefined' && window.innerWidth <= 768) return
+
     const parent = canvas.parentElement
     if (!parent) return
 
@@ -133,6 +136,7 @@ const ClickSpark: React.FC<ClickSparkProps> = ({
   }, [sparkColor, sparkSize, sparkRadius, sparkCount, duration, easeFunc, extraScale])
 
   const handleClick = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (typeof window !== 'undefined' && window.innerWidth <= 768) return
     const canvas = canvasRef.current
     if (!canvas) return
     const rect = canvas.getBoundingClientRect()
