@@ -134,6 +134,105 @@ function createTextTexture(gl: any, text: string, font = 'bold 30px monospace', 
   return { texture, width: canvas.width, height: canvas.height }
 }
 
+function createCardTextureCanvas(data: {
+  num?: string
+  title?: string
+  text?: string
+  desc?: string
+  accentColor?: string
+}) {
+  const canvas = document.createElement('canvas')
+  canvas.width = 800
+  canvas.height = 560
+  const ctx = canvas.getContext('2d')
+  if (!ctx) return canvas
+
+  const width = canvas.width
+  const height = canvas.height
+  const accent = data.accentColor || '#14b8a6'
+
+  // Dark card background
+  ctx.fillStyle = '#0e0e12'
+  ctx.beginPath()
+  ctx.roundRect(4, 4, width - 8, height - 8, 36)
+  ctx.fill()
+
+  // Border stroke
+  ctx.strokeStyle = 'rgba(255, 255, 255, 0.12)'
+  ctx.lineWidth = 2.5
+  ctx.beginPath()
+  ctx.roundRect(4, 4, width - 8, height - 8, 36)
+  ctx.stroke()
+
+  // Top Accent bar
+  const barGradient = ctx.createLinearGradient(50, 0, width - 50, 0)
+  barGradient.addColorStop(0, accent)
+  barGradient.addColorStop(0.7, `${accent}80`)
+  barGradient.addColorStop(1, 'transparent')
+  ctx.fillStyle = barGradient
+  ctx.beginPath()
+  ctx.roundRect(50, 24, width - 100, 5, 2.5)
+  ctx.fill()
+
+  // Ambient radial glow
+  const glowGradient = ctx.createRadialGradient(width - 120, 100, 10, width - 120, 100, 320)
+  glowGradient.addColorStop(0, `${accent}35`)
+  glowGradient.addColorStop(1, 'transparent')
+  ctx.fillStyle = glowGradient
+  ctx.fillRect(0, 0, width, height)
+
+  // Phase Number Badge
+  const numText = data.num || '01'
+  ctx.fillStyle = accent
+  ctx.font = 'bold 42px "JetBrains Mono", monospace'
+  ctx.fillText(numText, 54, 98)
+
+  // Title
+  ctx.fillStyle = '#ffffff'
+  ctx.font = 'bold 46px "Sora", sans-serif'
+  const titleText = data.title || data.text || 'Phase Card'
+  ctx.fillText(titleText, 54, 180)
+
+  // Description Paragraph
+  ctx.fillStyle = 'rgba(255, 255, 255, 0.65)'
+  ctx.font = '500 24px "Inter", sans-serif'
+
+  const descText = data.desc || data.text || ''
+  const words = descText.split(' ')
+  let line = ''
+  let y = 250
+  const maxWidth = width - 108
+  const lineHeight = 38
+
+  for (let n = 0; n < words.length; n++) {
+    const testLine = line + words[n] + ' '
+    const metrics = ctx.measureText(testLine)
+    if (metrics.width > maxWidth && n > 0) {
+      ctx.fillText(line, 54, y)
+      line = words[n] + ' '
+      y += lineHeight
+    } else {
+      line = testLine
+    }
+  }
+  ctx.fillText(line, 54, y)
+
+  // Bottom Pill Tag / Sprint Badge
+  ctx.fillStyle = 'rgba(255, 255, 255, 0.05)'
+  ctx.strokeStyle = 'rgba(255, 255, 255, 0.1)'
+  ctx.lineWidth = 1.5
+  ctx.beginPath()
+  ctx.roundRect(54, height - 90, 220, 46, 23)
+  ctx.fill()
+  ctx.stroke()
+
+  ctx.fillStyle = accent
+  ctx.font = '600 20px "JetBrains Mono", monospace'
+  ctx.fillText(`PHASE ${numText} →`, 82, height - 61)
+
+  return canvas
+}
+
 class Title {
   gl: any
   plane: any
@@ -195,7 +294,8 @@ class Media {
   extra: number
   geometry: any
   gl: any
-  image: string
+  image?: string
+  cardData: any
   index: number
   length: number
   renderer: any
@@ -223,6 +323,7 @@ class Media {
     geometry,
     gl,
     image,
+    cardData,
     index,
     length,
     renderer,
@@ -239,6 +340,7 @@ class Media {
     this.geometry = geometry
     this.gl = gl
     this.image = image
+    this.cardData = cardData || { text, image }
     this.index = index
     this.length = length
     this.renderer = renderer
@@ -328,12 +430,19 @@ class Media {
       },
       transparent: true
     })
-    const img = new Image()
-    img.crossOrigin = 'anonymous'
-    img.src = this.image
-    img.onload = () => {
-      texture.image = img
-      this.program.uniforms.uImageSizes.value = [img.naturalWidth, img.naturalHeight]
+
+    if (this.image && (this.image.startsWith('http') || this.image.startsWith('data:'))) {
+      const img = new Image()
+      img.crossOrigin = 'anonymous'
+      img.src = this.image
+      img.onload = () => {
+        texture.image = img
+        this.program.uniforms.uImageSizes.value = [img.naturalWidth, img.naturalHeight]
+      }
+    } else {
+      const cardCanvas = createCardTextureCanvas(this.cardData)
+      texture.image = cardCanvas
+      this.program.uniforms.uImageSizes.value = [cardCanvas.width, cardCanvas.height]
     }
   }
   createMesh() {
@@ -494,18 +603,10 @@ class App {
   }
   createMedias(items: any, bend = 1, textColor: string, borderRadius: number, font: string) {
     const defaultItems = [
-      { image: `https://picsum.photos/seed/1/800/600?grayscale`, text: 'Bridge' },
-      { image: `https://picsum.photos/seed/2/800/600?grayscale`, text: 'Desk Setup' },
-      { image: `https://picsum.photos/seed/3/800/600?grayscale`, text: 'Waterfall' },
-      { image: `https://picsum.photos/seed/4/800/600?grayscale`, text: 'Strawberries' },
-      { image: `https://picsum.photos/seed/5/800/600?grayscale`, text: 'Deep Diving' },
-      { image: `https://picsum.photos/seed/16/800/600?grayscale`, text: 'Train Track' },
-      { image: `https://picsum.photos/seed/17/800/600?grayscale`, text: 'Santorini' },
-      { image: `https://picsum.photos/seed/8/800/600?grayscale`, text: 'Blurry Lights' },
-      { image: `https://picsum.photos/seed/9/800/600?grayscale`, text: 'New York' },
-      { image: `https://picsum.photos/seed/10/800/600?grayscale`, text: 'Good Boy' },
-      { image: `https://picsum.photos/seed/21/800/600?grayscale`, text: 'Coastline' },
-      { image: `https://picsum.photos/seed/12/800/600?grayscale`, text: 'Palm Trees' }
+      { num: '01', title: 'Discover', text: 'Discover & Map', desc: 'We pressure-test the idea, map constraints, and align on the smallest version worth building.', accentColor: '#14b8a6' },
+      { num: '02', title: 'Design', text: 'UI/UX Prototyping', desc: 'Interfaces, architecture, and data models take shape as clickable, reviewable artifacts — not guesswork.', accentColor: '#ec4899' },
+      { num: '03', title: 'Build', text: 'Full-Stack Build', desc: 'Tight iterations with visible progress. You see working software every week, not just status decks.', accentColor: '#a855f7' },
+      { num: '04', title: 'Ship & scale', text: 'Ship & Scale', desc: 'We launch, instrument, and keep improving — handing over a codebase your team can actually own.', accentColor: '#f59e0b' },
     ]
     const galleryItems = items && items.length ? items : defaultItems
     this.mediasImages = galleryItems.concat(galleryItems)
@@ -514,12 +615,13 @@ class App {
         geometry: this.planeGeometry,
         gl: this.gl,
         image: data.image,
+        cardData: data,
         index,
         length: this.mediasImages.length,
         renderer: this.renderer,
         scene: this.scene,
         screen: this.screen,
-        text: data.text,
+        text: data.text || data.title || '',
         viewport: this.viewport,
         bend,
         textColor,
@@ -649,8 +751,12 @@ class App {
 }
 
 export interface CircularGalleryItem {
-  image: string
-  text: string
+  num?: string
+  title?: string
+  text?: string
+  desc?: string
+  accentColor?: string
+  image?: string
 }
 
 export interface CircularGalleryProps {
@@ -704,7 +810,7 @@ export default function CircularGallery({
       ref={containerRef}
       tabIndex={0}
       role="region"
-      aria-label="Circular image gallery. Use left and right arrow keys to navigate."
+      aria-label="Circular card gallery. Use left and right arrow keys to navigate."
     />
   )
 }

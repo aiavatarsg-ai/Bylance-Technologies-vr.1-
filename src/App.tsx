@@ -460,12 +460,48 @@ const steps = [
 ]
 
 const approachGalleryItems = [
-  { image: 'https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=800&q=80', text: '01. Discovery & Map' },
-  { image: 'https://images.unsplash.com/photo-1581291518857-4e27b48ff24e?auto=format&fit=crop&w=800&q=80', text: '02. UI/UX Prototyping' },
-  { image: 'https://images.unsplash.com/photo-1517694712202-14dd9538aa97?auto=format&fit=crop&w=800&q=80', text: '03. Full-Stack Build' },
-  { image: 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=800&q=80', text: '04. Ship & Scale' },
-  { image: 'https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?auto=format&fit=crop&w=800&q=80', text: '05. AI Integration' },
-  { image: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=800&q=80', text: '06. Real-Time Telemetry' },
+  {
+    num: '01',
+    title: 'Discover',
+    text: 'Discover & Map',
+    desc: 'We pressure-test the idea, map constraints, and align on the smallest version worth building.',
+    accentColor: '#14b8a6',
+  },
+  {
+    num: '02',
+    title: 'Design',
+    text: 'UI/UX Prototyping',
+    desc: 'Interfaces, architecture, and data models take shape as clickable, reviewable artifacts.',
+    accentColor: '#ec4899',
+  },
+  {
+    num: '03',
+    title: 'Build',
+    text: 'Full-Stack Build',
+    desc: 'Tight iterations with visible progress. You see working software every week.',
+    accentColor: '#a855f7',
+  },
+  {
+    num: '04',
+    title: 'Ship & scale',
+    text: 'Ship & Scale',
+    desc: 'We launch, instrument, and keep improving — handing over a codebase your team owns.',
+    accentColor: '#f59e0b',
+  },
+  {
+    num: '05',
+    title: 'AI Integration',
+    text: 'Applied AI',
+    desc: 'Embedding custom RAG pipelines and automated intelligent workflow agents.',
+    accentColor: '#3b82f6',
+  },
+  {
+    num: '06',
+    title: 'Telemetry',
+    text: 'Real-Time Health',
+    desc: 'Continuous uptime monitoring, security audits, and automated scaling.',
+    accentColor: '#10b981',
+  },
 ]
 
 function ApproachSection() {
