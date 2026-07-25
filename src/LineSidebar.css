@@ -5,7 +5,7 @@
   --marker-length: 64px;
   --marker-gap: 14px;
   --tick-scale: 0.45;
-  --max-shift: 75px;
+  --max-shift: 20px;
   --item-gap: 24px;
   --font-size: 1.25rem;
   --smoothing: 100ms;

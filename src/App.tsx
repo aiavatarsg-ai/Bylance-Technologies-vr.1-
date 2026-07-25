@@ -138,8 +138,8 @@ function Navbar() {
         markerColor="#52525b"
         showIndex={true}
         showMarker={true}
-        proximityRadius={200}
-        maxShift={75}
+        proximityRadius={160}
+        maxShift={20}
         falloff="smooth"
         markerLength={64}
         markerGap={14}
