@@ -1,8 +1,5 @@
 import { useEffect, useRef, useState, useCallback } from "react"
 import { flushSync } from "react-dom"
-import { Moon, Sun } from "lucide-react"
-import { motion, AnimatePresence } from "motion/react"
-import { cn } from "@/lib/utils"
 
 type AnimatedThemeTogglerProps = {
   className?: string
@@ -10,54 +7,50 @@ type AnimatedThemeTogglerProps = {
 
 export const AnimatedThemeToggler = ({ className }: AnimatedThemeTogglerProps) => {
   const buttonRef = useRef<HTMLButtonElement>(null)
-  const [darkMode, setDarkMode] = useState(() =>
-    typeof window !== "undefined"
-      ? !document.documentElement.classList.contains("light")
-      : true
-  )
+  const [darkMode, setDarkMode] = useState(true)
+  const [animating, setAnimating] = useState(false)
 
   useEffect(() => {
-    const syncTheme = () =>
-      setDarkMode(!document.documentElement.classList.contains("light"))
-
-    const observer = new MutationObserver(syncTheme)
-    observer.observe(document.documentElement, {
-      attributes: true,
-      attributeFilter: ["class"],
-    })
-    return () => observer.disconnect()
+    const saved = localStorage.getItem("bylance-theme")
+    if (saved === "light") {
+      setDarkMode(false)
+      document.documentElement.classList.add("light")
+    }
   }, [])
 
   const onToggle = useCallback(async () => {
-    if (!buttonRef.current) return
+    if (animating || !buttonRef.current) return
+    setAnimating(true)
 
+    const toggled = !darkMode
     const supportsVT = "startViewTransition" in document
 
     if (supportsVT) {
-      await (document as Document & { startViewTransition: (cb: () => void) => { ready: Promise<void> } })
-        .startViewTransition(() => {
-          flushSync(() => {
-            const toggled = !darkMode
-            setDarkMode(toggled)
-            document.documentElement.classList.toggle("light", !toggled)
-            localStorage.setItem("bylance-theme", toggled ? "dark" : "light")
-          })
-        }).ready
-
-      const { left, top, width, height } =
-        buttonRef.current.getBoundingClientRect()
+      const { left, top, width, height } = buttonRef.current.getBoundingClientRect()
       const centerX = left + width / 2
       const centerY = top + height / 2
-      const maxDistance = Math.hypot(
+      const maxDist = Math.hypot(
         Math.max(centerX, window.innerWidth - centerX),
         Math.max(centerY, window.innerHeight - centerY)
       )
+
+      const transition = (document as Document & {
+        startViewTransition: (cb: () => void) => { ready: Promise<void> }
+      }).startViewTransition(() => {
+        flushSync(() => {
+          setDarkMode(toggled)
+          document.documentElement.classList.toggle("light", !toggled)
+          localStorage.setItem("bylance-theme", toggled ? "dark" : "light")
+        })
+      })
+
+      await transition.ready
 
       document.documentElement.animate(
         {
           clipPath: [
             `circle(0px at ${centerX}px ${centerY}px)`,
-            `circle(${maxDistance}px at ${centerX}px ${centerY}px)`,
+            `circle(${maxDist}px at ${centerX}px ${centerY}px)`,
           ],
         },
         {
@@ -67,52 +60,58 @@ export const AnimatedThemeToggler = ({ className }: AnimatedThemeTogglerProps) =
         }
       )
     } else {
-      const toggled = !darkMode
       setDarkMode(toggled)
       document.documentElement.classList.toggle("light", !toggled)
       localStorage.setItem("bylance-theme", toggled ? "dark" : "light")
     }
-  }, [darkMode])
+
+    setTimeout(() => setAnimating(false), 750)
+  }, [darkMode, animating])
 
   return (
     <button
       ref={buttonRef}
       onClick={onToggle}
       aria-label={darkMode ? "Switch to light mode" : "Switch to dark mode"}
-      className={cn(
-        "flex items-center justify-center w-12 h-12 rounded-full outline-none focus:outline-none active:outline-none focus:ring-0 cursor-pointer",
-        "bg-white/8 border border-white/12 backdrop-blur-sm",
-        "hover:bg-white/14 hover:border-white/20 transition-all duration-200",
-        "shadow-lg",
-        className
-      )}
       type="button"
+      className={`theme-fab ${className ?? ""}`}
     >
-      <AnimatePresence mode="wait" initial={false}>
-        {darkMode ? (
-          <motion.span
-            key="sun-icon"
-            initial={{ opacity: 0, scale: 0.55, rotate: 25 }}
-            animate={{ opacity: 1, scale: 1, rotate: 0 }}
-            exit={{ opacity: 0, scale: 0.55 }}
-            transition={{ duration: 0.28 }}
-            className="text-white/80 flex items-center justify-center"
-          >
-            <Sun size={20} />
-          </motion.span>
-        ) : (
-          <motion.span
-            key="moon-icon"
-            initial={{ opacity: 0, scale: 0.55, rotate: -25 }}
-            animate={{ opacity: 1, scale: 1, rotate: 0 }}
-            exit={{ opacity: 0, scale: 0.55 }}
-            transition={{ duration: 0.28 }}
-            className="text-white/80 flex items-center justify-center"
-          >
-            <Moon size={20} />
-          </motion.span>
-        )}
-      </AnimatePresence>
+      {/* Sun icon — shown in dark mode so you can switch to light */}
+      <span
+        className="theme-fab__icon"
+        style={{
+          opacity: darkMode ? 1 : 0,
+          transform: darkMode ? "scale(1) rotate(0deg)" : "scale(0.5) rotate(45deg)",
+        }}
+      >
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none"
+          stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+          <circle cx="12" cy="12" r="4"/>
+          <line x1="12" y1="2" x2="12" y2="4"/>
+          <line x1="12" y1="20" x2="12" y2="22"/>
+          <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/>
+          <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+          <line x1="2" y1="12" x2="4" y2="12"/>
+          <line x1="20" y1="12" x2="22" y2="12"/>
+          <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/>
+          <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+        </svg>
+      </span>
+
+      {/* Moon icon — shown in light mode so you can switch back to dark */}
+      <span
+        className="theme-fab__icon"
+        style={{
+          opacity: darkMode ? 0 : 1,
+          transform: darkMode ? "scale(0.5) rotate(-45deg)" : "scale(1) rotate(0deg)",
+          position: "absolute",
+        }}
+      >
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none"
+          stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+          <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+        </svg>
+      </span>
     </button>
   )
 }
