@@ -148,7 +148,7 @@ export default function ServicesSection() {
   }, [])
 
   return (
-    <section id="services" className="py-28 px-4 grid-bg relative overflow-hidden" ref={ref}>
+    <section id="services" className="py-20 px-4 grid-bg relative overflow-hidden" ref={ref}>
       <div className="absolute inset-0 pointer-events-none z-0">
         <CursorGrid
           cellSize={48}
