@@ -947,7 +947,19 @@ function ContactSection() {
               initialStep={1}
               accentColor="#14b8a6"
               onValidateStep={handleValidateStep}
-              onFinalStepCompleted={() => setSent(true)}
+              onFinalStepCompleted={() => {
+                const subject = encodeURIComponent(`Project Brief: ${form.projectType || 'New Project'} (${form.company || 'Client'})`)
+                const body = encodeURIComponent(
+                  `Name: ${form.name}\n` +
+                  `Work Email: ${form.email}\n` +
+                  `Company: ${form.company}\n` +
+                  `Project Type: ${form.projectType}\n\n` +
+                  `Project Details & Scope:\n${form.details}\n\n` +
+                  `Company Description:\n${form.description || 'N/A'}`
+                )
+                window.open(`https://mail.google.com/mail/?view=cm&fs=1&to=bylancetechnologies@gmail.com&su=${subject}&body=${body}`, '_blank')
+                setSent(true)
+              }}
               backButtonText="Back"
               nextButtonText="Next Step"
             >
