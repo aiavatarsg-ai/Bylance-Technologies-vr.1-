@@ -891,7 +891,7 @@ function ContactSection() {
             Share a few details and we'll reply within one business day with next steps — no sales runaround.
           </p>
           {/* Email */}
-          <a href="mailto:bylancetechnologies@gmail.com" className="flex items-center gap-4 p-4 rounded-xl border border-white/8 bg-[#0f0f0f] hover:border-teal-500/30 hover:bg-teal-500/5 transition-all duration-200 group">
+          <a href="https://mail.google.com/mail/?view=cm&fs=1&to=bylancetechnologies@gmail.com" target="_blank" rel="noopener noreferrer" className="flex items-center gap-4 p-4 rounded-xl border border-white/8 bg-[#0f0f0f] hover:border-teal-500/30 hover:bg-teal-500/5 transition-all duration-200 group">
             <div className="w-10 h-10 rounded-lg bg-teal-500/10 border border-teal-500/20 flex items-center justify-center text-teal-400 flex-shrink-0">
               <svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
                 <path strokeLinecap="round" strokeLinejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75" />
@@ -1071,7 +1071,7 @@ function Footer() {
             <p className="text-white/25 text-xs uppercase tracking-widest mb-4">Get in touch</p>
             <ul className="flex flex-col gap-2.5">
               <li>
-                <a href="mailto:bylancetechnologies@gmail.com" className="flex items-center gap-1.5 text-white/50 hover:text-teal-400 text-sm transition-colors break-all">
+                <a href="https://mail.google.com/mail/?view=cm&fs=1&to=bylancetechnologies@gmail.com" target="_blank" rel="noopener noreferrer" className="flex items-center gap-1.5 text-white/50 hover:text-teal-400 text-sm transition-colors break-all">
                   <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5} className="flex-shrink-0">
                     <path strokeLinecap="round" strokeLinejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75" />
                   </svg>
@@ -1097,7 +1097,7 @@ function Footer() {
         <div className="flex flex-col sm:flex-row items-center justify-between gap-4 pt-8 border-t border-white/8">
           <p className="text-white/25 text-xs">© 2026 Bylance Technologies. All rights reserved.</p>
           <div className="flex items-center gap-4">
-            <a href="mailto:bylancetechnologies@gmail.com" className="text-white/30 hover:text-teal-400 transition-colors" title="Email Us">
+            <a href="https://mail.google.com/mail/?view=cm&fs=1&to=bylancetechnologies@gmail.com" target="_blank" rel="noopener noreferrer" className="text-white/30 hover:text-teal-400 transition-colors" title="Email Us via Gmail">
               <svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
                 <path strokeLinecap="round" strokeLinejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75" />
               </svg>
