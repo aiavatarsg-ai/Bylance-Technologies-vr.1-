@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState, useCallback } from "react"
 import { flushSync } from "react-dom"
 import { Moon, Sun } from "lucide-react"
-import { motion, AnimatePresence } from "framer-motion"
+import { motion, AnimatePresence } from "motion/react"
 import { cn } from "@/lib/utils"
 
 type AnimatedThemeTogglerProps = {
@@ -31,18 +31,18 @@ export const AnimatedThemeToggler = ({ className }: AnimatedThemeTogglerProps) =
   const onToggle = useCallback(async () => {
     if (!buttonRef.current) return
 
-    // View Transition API may not be supported everywhere
     const supportsVT = "startViewTransition" in document
 
     if (supportsVT) {
-      await document.startViewTransition(() => {
-        flushSync(() => {
-          const toggled = !darkMode
-          setDarkMode(toggled)
-          document.documentElement.classList.toggle("light", !toggled)
-          localStorage.setItem("bylance-theme", toggled ? "dark" : "light")
-        })
-      }).ready
+      await (document as Document & { startViewTransition: (cb: () => void) => { ready: Promise<void> } })
+        .startViewTransition(() => {
+          flushSync(() => {
+            const toggled = !darkMode
+            setDarkMode(toggled)
+            document.documentElement.classList.toggle("light", !toggled)
+            localStorage.setItem("bylance-theme", toggled ? "dark" : "light")
+          })
+        }).ready
 
       const { left, top, width, height } =
         buttonRef.current.getBoundingClientRect()
