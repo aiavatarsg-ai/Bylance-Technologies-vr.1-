@@ -1073,7 +1073,10 @@ function Footer() {
           <div>
             <p className="text-white/25 text-xs uppercase tracking-widest mb-4">Explore</p>
             <ul className="flex flex-col gap-2.5">
-              {[['Contact', '#contact']].map(([label, href]) => (
+              {[
+                ['Clients', '#clients'],
+                ['Contact', '#contact'],
+              ].map(([label, href]) => (
                 <li key={label}><a href={href} className="text-white/50 hover:text-white text-sm transition-colors">{label}</a></li>
               ))}
             </ul>
