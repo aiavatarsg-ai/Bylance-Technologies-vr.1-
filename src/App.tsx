@@ -901,6 +901,32 @@ function ContactSection() {
               <p className="text-white/80 text-sm">bylancetechnologies@gmail.com</p>
             </div>
           </div>
+
+          {/* WhatsApp */}
+          <a href="https://wa.me/message/673D7WORWFGKL1" target="_blank" rel="noopener noreferrer" className="flex items-center gap-4 p-4 rounded-xl border border-white/8 bg-[#0f0f0f] hover:border-green-500/30 hover:bg-green-500/5 transition-all duration-200 group">
+            <div className="w-10 h-10 rounded-lg bg-green-500/10 border border-green-500/20 flex items-center justify-center text-green-400 flex-shrink-0">
+              <svg width="18" height="18" viewBox="0 0 32 32" fill="currentColor">
+                <path d="M16 0C7.163 0 0 7.163 0 16c0 2.82.736 5.463 2.027 7.754L0 32l8.496-2.004A15.93 15.93 0 0 0 16 32c8.837 0 16-7.163 16-16S24.837 0 16 0zm0 29.333a13.27 13.27 0 0 1-6.77-1.849l-.485-.288-5.043 1.19 1.215-4.91-.317-.502A13.268 13.268 0 0 1 2.667 16C2.667 8.636 8.636 2.667 16 2.667S29.333 8.636 29.333 16 23.364 29.333 16 29.333zm7.27-9.938c-.398-.2-2.355-1.162-2.72-1.294-.365-.133-.63-.2-.895.2-.265.398-1.027 1.294-1.26 1.56-.232.265-.464.298-.862.1-.398-.2-1.68-.619-3.2-1.974-1.183-1.054-1.981-2.355-2.214-2.753-.232-.398-.025-.613.175-.812.18-.179.398-.464.597-.697.2-.232.265-.398.398-.663.132-.265.066-.497-.034-.697-.1-.2-.895-2.157-1.227-2.953-.323-.774-.651-.669-.895-.681l-.762-.013c-.265 0-.696.1-1.061.497-.365.398-1.393 1.36-1.393 3.317s1.426 3.848 1.625 4.113c.2.265 2.805 4.282 6.796 6.003.95.41 1.691.655 2.269.839.953.304 1.82.261 2.506.158.765-.114 2.355-.963 2.688-1.893.332-.93.332-1.727.232-1.893-.099-.166-.365-.265-.763-.464z"/>
+              </svg>
+            </div>
+            <div>
+              <p className="text-white/30 text-xs uppercase tracking-wider mb-0.5 group-hover:text-green-400/60 transition-colors">WhatsApp</p>
+              <p className="text-white/80 text-sm group-hover:text-white transition-colors">Message us directly</p>
+            </div>
+          </a>
+
+          {/* LinkedIn */}
+          <a href="https://www.linkedin.com/company/bylance-technologies/about/" target="_blank" rel="noopener noreferrer" className="flex items-center gap-4 p-4 rounded-xl border border-white/8 bg-[#0f0f0f] hover:border-blue-500/30 hover:bg-blue-500/5 transition-all duration-200 group">
+            <div className="w-10 h-10 rounded-lg bg-blue-500/10 border border-blue-500/20 flex items-center justify-center text-blue-400 flex-shrink-0">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+              </svg>
+            </div>
+            <div>
+              <p className="text-white/30 text-xs uppercase tracking-wider mb-0.5 group-hover:text-blue-400/60 transition-colors">LinkedIn</p>
+              <p className="text-white/80 text-sm group-hover:text-white transition-colors">Bylance Technologies</p>
+            </div>
+          </a>
         </div>
 
         <div
@@ -1042,18 +1068,32 @@ function Footer() {
 
           <div>
             <p className="text-white/25 text-xs uppercase tracking-widest mb-4">Get in touch</p>
-            <a href="mailto:bylancetechnologies@gmail.com" className="text-white/50 hover:text-white text-sm transition-colors break-all">bylancetechnologies@gmail.com</a>
+            <ul className="flex flex-col gap-2.5">
+              <li><a href="mailto:bylancetechnologies@gmail.com" className="text-white/50 hover:text-white text-sm transition-colors break-all">bylancetechnologies@gmail.com</a></li>
+              <li>
+                <a href="https://wa.me/message/673D7WORWFGKL1" target="_blank" rel="noopener noreferrer" className="flex items-center gap-1.5 text-white/50 hover:text-green-400 text-sm transition-colors">
+                  <svg width="14" height="14" viewBox="0 0 32 32" fill="currentColor"><path d="M16 0C7.163 0 0 7.163 0 16c0 2.82.736 5.463 2.027 7.754L0 32l8.496-2.004A15.93 15.93 0 0 0 16 32c8.837 0 16-7.163 16-16S24.837 0 16 0zm0 29.333a13.27 13.27 0 0 1-6.77-1.849l-.485-.288-5.043 1.19 1.215-4.91-.317-.502A13.268 13.268 0 0 1 2.667 16C2.667 8.636 8.636 2.667 16 2.667S29.333 8.636 29.333 16 23.364 29.333 16 29.333zm7.27-9.938c-.398-.2-2.355-1.162-2.72-1.294-.365-.133-.63-.2-.895.2-.265.398-1.027 1.294-1.26 1.56-.232.265-.464.298-.862.1-.398-.2-1.68-.619-3.2-1.974-1.183-1.054-1.981-2.355-2.214-2.753-.232-.398-.025-.613.175-.812.18-.179.398-.464.597-.697.2-.232.265-.398.398-.663.132-.265.066-.497-.034-.697-.1-.2-.895-2.157-1.227-2.953-.323-.774-.651-.669-.895-.681l-.762-.013c-.265 0-.696.1-1.061.497-.365.398-1.393 1.36-1.393 3.317s1.426 3.848 1.625 4.113c.2.265 2.805 4.282 6.796 6.003.95.41 1.691.655 2.269.839.953.304 1.82.261 2.506.158.765-.114 2.355-.963 2.688-1.893.332-.93.332-1.727.232-1.893-.099-.166-.365-.265-.763-.464z"/></svg>
+                  WhatsApp
+                </a>
+              </li>
+              <li>
+                <a href="https://www.linkedin.com/company/bylance-technologies/about/" target="_blank" rel="noopener noreferrer" className="flex items-center gap-1.5 text-white/50 hover:text-blue-400 text-sm transition-colors">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+                  LinkedIn
+                </a>
+              </li>
+            </ul>
           </div>
         </div>
 
         <div className="flex flex-col sm:flex-row items-center justify-between gap-4 pt-8 border-t border-white/8">
           <p className="text-white/25 text-xs">© 2026 Bylance Technologies. All rights reserved.</p>
           <div className="flex items-center gap-4">
-            <a href="#" className="text-white/30 hover:text-white transition-colors">
+            <a href="https://www.linkedin.com/company/bylance-technologies/about/" target="_blank" rel="noopener noreferrer" className="text-white/30 hover:text-blue-400 transition-colors" title="LinkedIn">
               <svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" /></svg>
             </a>
-            <a href="#" className="text-white/30 hover:text-white transition-colors">
-              <svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" /></svg>
+            <a href="https://wa.me/message/673D7WORWFGKL1" target="_blank" rel="noopener noreferrer" className="text-white/30 hover:text-green-400 transition-colors" title="WhatsApp">
+              <svg width="18" height="18" viewBox="0 0 32 32" fill="currentColor"><path d="M16 0C7.163 0 0 7.163 0 16c0 2.82.736 5.463 2.027 7.754L0 32l8.496-2.004A15.93 15.93 0 0 0 16 32c8.837 0 16-7.163 16-16S24.837 0 16 0zm0 29.333a13.27 13.27 0 0 1-6.77-1.849l-.485-.288-5.043 1.19 1.215-4.91-.317-.502A13.268 13.268 0 0 1 2.667 16C2.667 8.636 8.636 2.667 16 2.667S29.333 8.636 29.333 16 23.364 29.333 16 29.333zm7.27-9.938c-.398-.2-2.355-1.162-2.72-1.294-.365-.133-.63-.2-.895.2-.265.398-1.027 1.294-1.26 1.56-.232.265-.464.298-.862.1-.398-.2-1.68-.619-3.2-1.974-1.183-1.054-1.981-2.355-2.214-2.753-.232-.398-.025-.613.175-.812.18-.179.398-.464.597-.697.2-.232.265-.398.398-.663.132-.265.066-.497-.034-.697-.1-.2-.895-2.157-1.227-2.953-.323-.774-.651-.669-.895-.681l-.762-.013c-.265 0-.696.1-1.061.497-.365.398-1.393 1.36-1.393 3.317s1.426 3.848 1.625 4.113c.2.265 2.805 4.282 6.796 6.003.95.41 1.691.655 2.269.839.953.304 1.82.261 2.506.158.765-.114 2.355-.963 2.688-1.893.332-.93.332-1.727.232-1.893-.099-.166-.365-.265-.763-.464z"/></svg>
             </a>
             <a href="https://github.com/nezfn" target="_blank" rel="noopener noreferrer" className="text-white/30 hover:text-white transition-colors" title="GitHub: nezfn">
               <svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0112 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z" /></svg>
