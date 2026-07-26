@@ -31,6 +31,8 @@ function clamp(v: number, lo: number, hi: number) {
 function useScrollProgress(ref: React.RefObject<HTMLElement | null>, start = 0, end = 1) {
   const [progress, setProgress] = useState(0)
   useEffect(() => {
+    // Skip scroll progress computation on mobile — no pinned scroll section
+    if (typeof window !== 'undefined' && window.innerWidth <= 768) return
     const handler = () => {
       if (!ref.current) return
       const rect = ref.current.getBoundingClientRect()

@@ -1,4 +1,4 @@
-import React, { forwardRef, useMemo, useRef, useEffect } from 'react';
+import React, { forwardRef, useMemo, useRef, useEffect, useState } from 'react';
 import './VariableProximity.css';
 
 export interface VariableProximityProps extends React.HTMLAttributes<HTMLSpanElement> {
@@ -13,8 +13,9 @@ export interface VariableProximityProps extends React.HTMLAttributes<HTMLSpanEle
   style?: React.CSSProperties;
 }
 
-function useAnimationFrame(callback: () => void) {
+function useAnimationFrame(callback: () => void, enabled: boolean) {
   useEffect(() => {
+    if (!enabled) return;
     let frameId: number;
     const loop = () => {
       callback();
@@ -22,13 +23,14 @@ function useAnimationFrame(callback: () => void) {
     };
     frameId = requestAnimationFrame(loop);
     return () => cancelAnimationFrame(frameId);
-  }, [callback]);
+  }, [callback, enabled]);
 }
 
-function useMousePositionRef(containerRef?: React.RefObject<HTMLElement | null>) {
+function useMousePositionRef(containerRef?: React.RefObject<HTMLElement | null>, enabled?: boolean) {
   const positionRef = useRef<{ x: number; y: number }>({ x: 0, y: 0 });
 
   useEffect(() => {
+    if (!enabled) return;
     const updatePosition = (x: number, y: number) => {
       if (containerRef?.current) {
         const rect = containerRef.current.getBoundingClientRect();
@@ -39,20 +41,11 @@ function useMousePositionRef(containerRef?: React.RefObject<HTMLElement | null>)
     };
 
     const handleMouseMove = (ev: MouseEvent) => updatePosition(ev.clientX, ev.clientY);
-    const handleTouchMove = (ev: TouchEvent) => {
-      const touch = ev.touches[0];
-      if (touch) {
-        updatePosition(touch.clientX, touch.clientY);
-      }
-    };
-
     window.addEventListener('mousemove', handleMouseMove);
-    window.addEventListener('touchmove', handleTouchMove);
     return () => {
       window.removeEventListener('mousemove', handleMouseMove);
-      window.removeEventListener('touchmove', handleTouchMove);
     };
-  }, [containerRef]);
+  }, [containerRef, enabled]);
 
   return positionRef;
 }
@@ -71,9 +64,19 @@ const VariableProximity = forwardRef<HTMLSpanElement, VariableProximityProps>((p
     ...restProps
   } = props;
 
+  const [isMobile, setIsMobile] = useState<boolean>(() =>
+    typeof window !== 'undefined' && window.innerWidth <= 768
+  );
+
+  useEffect(() => {
+    const check = () => setIsMobile(window.innerWidth <= 768);
+    window.addEventListener('resize', check, { passive: true });
+    return () => window.removeEventListener('resize', check);
+  }, []);
+
   const letterRefs = useRef<Array<HTMLSpanElement | null>>([]);
   const interpolatedSettingsRef = useRef<string[]>([]);
-  const mousePositionRef = useMousePositionRef(containerRef);
+  const mousePositionRef = useMousePositionRef(containerRef, !isMobile);
   const lastPositionRef = useRef<{ x: number | null; y: number | null }>({ x: null, y: null });
 
   const parsedSettings = useMemo(() => {
@@ -153,7 +156,22 @@ const VariableProximity = forwardRef<HTMLSpanElement, VariableProximityProps>((p
       interpolatedSettingsRef.current[index] = newSettings;
       letterRef.style.fontVariationSettings = newSettings;
     });
-  });
+  }, !isMobile);
+
+  // On mobile: render plain static text — zero rAF cost, no font-variation repaints
+  if (isMobile) {
+    return (
+      <span
+        ref={ref}
+        className={`${className} variable-proximity`}
+        onClick={onClick}
+        style={{ display: 'inline', ...style }}
+        {...restProps}
+      >
+        {label}
+      </span>
+    );
+  }
 
   const words = label.split(' ');
   let letterIndex = 0;

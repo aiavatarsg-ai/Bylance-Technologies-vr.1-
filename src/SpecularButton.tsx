@@ -118,6 +118,9 @@ export default function SpecularButton({
   propsRef.current = { radius, lineColor, baseColor, intensity, shineSize, shineFade, thickness, speed, followMouse, proximity, autoAnimate };
 
   useEffect(() => {
+    // Skip all WebGL/OGL work on mobile touch devices — zero GPU cost
+    if (typeof window !== 'undefined' && window.innerWidth <= 768) return;
+
     const btn = btnRef.current;
     const fx = fxRef.current;
     if (!btn || !fx) return;

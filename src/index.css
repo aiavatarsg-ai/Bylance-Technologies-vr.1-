@@ -15,8 +15,9 @@ html {
   scrollbar-width: none;
 }
 
-/* Proportional website scaling for 150% browser zoom ratio and compact viewports */
-@media (max-width: 1479px) {
+/* Proportional website scaling for 150% browser zoom ratio and compact viewports.
+   Scoped to desktop-only: mobile viewports (<=768px) should NOT be downscaled. */
+@media (min-width: 769px) and (max-width: 1479px) {
   html {
     font-size: 80%;
   }
@@ -86,6 +87,34 @@ body {
     linear-gradient(rgba(255,255,255,0.035) 1px, transparent 1px),
     linear-gradient(90deg, rgba(255,255,255,0.035) 1px, transparent 1px);
   background-size: 48px 48px;
+}
+
+/* ─── Mobile Performance Optimizations ──────────────────────────────────────── */
+@media (max-width: 768px) {
+  /* Remove tap highlight flash on iOS */
+  * {
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  /* Faster font rasterization on low-powered chips */
+  body {
+    text-rendering: optimizeSpeed;
+  }
+
+  /* Disable grid background on mobile — saves GPU compositing cost */
+  .grid-bg {
+    background-image: none;
+  }
+
+  /* Disable float animations on mobile */
+  .float-anim {
+    animation: none;
+  }
+
+  /* Disable marquee on mobile for smoother scroll */
+  .marquee-track {
+    animation: none;
+  }
 }
 
 @keyframes scrollLine {
