@@ -217,12 +217,12 @@ function Hero() {
   const textY2 = isMobile ? 0 : (1 - p) * 18
 
   return (
-    <div ref={pinRef} id="hero" style={{ height: isMobile ? 'auto' : '150vh' }} className="relative bg-[#080808] overflow-x-hidden max-w-full">
+    <div ref={pinRef} id="hero" style={{ height: isMobile ? 'auto' : '100vh' }} className="relative bg-[#080808] overflow-x-hidden max-w-full">
       <div
         className={
           isMobile
             ? 'relative w-full max-w-full overflow-x-hidden min-h-[85vh] py-24 px-4 flex flex-col items-center justify-center text-center grid-bg select-none z-10'
-            : 'sticky top-0 h-screen overflow-hidden flex flex-col items-center justify-between grid-bg select-none'
+            : 'relative w-full h-screen overflow-hidden flex flex-col items-center justify-between grid-bg select-none'
         }
         onMouseMove={handleMouseMove}
         onMouseLeave={handleMouseLeave}
