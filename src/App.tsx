@@ -12,7 +12,6 @@ import ClientsSection from './ClientsSection'
 import ServicesSection from './ServicesSection'
 import ClickSpark from './ClickSpark'
 import BorderGlow from './BorderGlow'
-import { AnimatedThemeToggler } from '@/components/ui/animated-theme-toggler'
 
 
 
@@ -1144,11 +1143,6 @@ export default function App() {
         <ManifestoSection />
         <ContactSection />
         <Footer />
-        {/* ── Theme Toggle Button ── */}
-        <div className="fixed bottom-6 left-6 z-[1000]">
-          <AnimatedThemeToggler />
-        </div>
-
         {/* ── Floating WhatsApp Button ── */}
         <a
           href="https://wa.me/message/673D7WORWFGKL1"
