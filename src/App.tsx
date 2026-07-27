@@ -851,12 +851,6 @@ function ContactSection() {
     if (step === 1) {
       return form.name.trim().length > 0 && emailRegex.test(form.email.trim())
     }
-    if (step === 2) {
-      return form.projectType.trim().length > 0 && form.details.trim().length > 0
-    }
-    if (step === 3) {
-      return form.company.trim().length > 0
-    }
     return true
   }
 
@@ -983,25 +977,23 @@ function ContactSection() {
               <Step>
                 <div className="mb-2">
                   <h3 style={{ fontFamily: 'Sora, sans-serif' }} className="text-xl font-semibold text-white mb-1">Project Details</h3>
-                  <p className="text-white/45 text-xs">Tell us about the project type and key requirements.</p>
+                  <p className="text-white/45 text-xs">Tell us about the project type and key requirements (Optional).</p>
                 </div>
                 <div className="flex flex-col gap-3.5 mt-4">
                   <div>
-                    <label className={labelClass}>Project Type *</label>
+                    <label className={labelClass}>Project Type <span className="text-white/30 font-normal">(Optional)</span></label>
                     <input
                       className={inputClass}
                       placeholder="e.g. AI Web App, Mobile App, Cloud Infrastructure"
-                      required
                       value={form.projectType}
                       onChange={e => setForm(f => ({ ...f, projectType: e.target.value }))}
                     />
                   </div>
                   <div>
-                    <label className={labelClass}>Project Details & Scope *</label>
+                    <label className={labelClass}>Project Details & Scope <span className="text-white/30 font-normal">(Optional)</span></label>
                     <textarea
                       className={inputClass + ' resize-none h-24'}
                       placeholder="What are you building, and what does success look like?"
-                      required
                       value={form.details}
                       onChange={e => setForm(f => ({ ...f, details: e.target.value }))}
                     />
@@ -1012,21 +1004,20 @@ function ContactSection() {
               <Step>
                 <div className="mb-2">
                   <h3 style={{ fontFamily: 'Sora, sans-serif' }} className="text-xl font-semibold text-white mb-1">Company Details</h3>
-                  <p className="text-white/45 text-xs">Tell us about your organization and team.</p>
+                  <p className="text-white/45 text-xs">Tell us about your organization and team (Optional).</p>
                 </div>
                 <div className="flex flex-col gap-3.5 mt-4">
                   <div>
-                    <label className={labelClass}>Company / Organization *</label>
+                    <label className={labelClass}>Company / Organization <span className="text-white/30 font-normal">(Optional)</span></label>
                     <input
                       className={inputClass}
                       placeholder="e.g. Acme Corp"
-                      required
                       value={form.company}
                       onChange={e => setForm(f => ({ ...f, company: e.target.value }))}
                     />
                   </div>
                   <div>
-                    <label className={labelClass}>Description</label>
+                    <label className={labelClass}>Description <span className="text-white/30 font-normal">(Optional)</span></label>
                     <textarea
                       className={inputClass + ' resize-none h-20'}
                       placeholder="Brief description of your company or product focus..."
